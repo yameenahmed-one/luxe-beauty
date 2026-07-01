@@ -15,7 +15,6 @@ const config: Config = {
         background: '#FFF8FA',
         dark: '#1B1B1B',
         gold: '#D4AF37',
-        white: '#FFFFFF',
         'primary-dark': '#E8356A',
         'primary-light': '#FF7AA0',
         'gold-light': '#F0CC5A',
@@ -34,6 +33,7 @@ const config: Config = {
         'marquee2': 'marquee2 25s linear infinite',
         'spin-slow': 'spin 8s linear infinite',
         'pulse-slow': 'pulse 3s ease-in-out infinite',
+        'scroll': 'scroll 20s linear infinite',
       },
       keyframes: {
         float: {
@@ -41,8 +41,8 @@ const config: Config = {
           '50%': { transform: 'translateY(-20px)' },
         },
         glow: {
-          'from': { boxShadow: '0 0 10px #FF4F81, 0 0 20px #FF4F81, 0 0 30px #FF4F81' },
-          'to': { boxShadow: '0 0 20px #FF4F81, 0 0 40px #FF4F81, 0 0 60px #FF4F81' },
+          'from': { boxShadow: '0 0 10px #FF4F81, 0 0 20px #FF4F81' },
+          'to': { boxShadow: '0 0 20px #FF4F81, 0 0 40px #FF4F81' },
         },
         shimmer: {
           '0%': { backgroundPosition: '-200% 0' },
@@ -64,6 +64,10 @@ const config: Config = {
           '0%': { transform: 'translateX(100%)' },
           '100%': { transform: 'translateX(0%)' },
         },
+        scroll: {
+          'from': { transform: 'translateX(0)' },
+          'to': { transform: 'translateX(-50%)' },
+        },
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
@@ -77,9 +81,6 @@ const config: Config = {
         'glow-pink': '0 0 30px rgba(255, 79, 129, 0.4)',
         'glow-gold': '0 0 30px rgba(212, 175, 55, 0.4)',
         'glass': '0 8px 32px rgba(31, 38, 135, 0.07)',
-      },
-      backdropBlur: {
-        xs: '2px',
       },
     },
   },

@@ -1,69 +1,78 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-import { motion } from 'framer-motion'
+import { useEffect, useRef, useState } from 'react'
 
 export default function CustomCursor() {
-  const [pos, setPos] = useState({ x: 0, y: 0 })
-  const [ring, setRing] = useState({ x: 0, y: 0 })
-  const [isHovering, setIsHovering] = useState(false)
-  const [isVisible, setIsVisible] = useState(false)
+  const dotRef = useRef<HTMLDivElement>(null)
+  const ringRef = useRef<HTMLDivElement>(null)
+  const [isMobile, setIsMobile] = useState(true)
 
   useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setPos({ x: e.clientX, y: e.clientY })
-      setIsVisible(true)
+    if (window.innerWidth < 768) return
+    setIsMobile(false)
+
+    let mouseX = -100
+    let mouseY = -100
+    let ringX = -100
+    let ringY = -100
+    let rafId: number
+
+    const onMouseMove = (e: MouseEvent) => {
+      mouseX = e.clientX
+      mouseY = e.clientY
+
+      // Move dot instantly
+      if (dotRef.current) {
+        dotRef.current.style.transform = `translate(${mouseX - 4}px, ${mouseY - 4}px)`
+        dotRef.current.style.opacity = '1'
+      }
     }
 
-    const handleMouseEnter = () => setIsHovering(true)
-    const handleMouseLeave = () => setIsHovering(false)
+    const onMouseOver = (e: MouseEvent) => {
+      const target = e.target as Element
+      const isInteractive = !!target.closest('a, button, [role="button"], input, textarea, select')
+      if (dotRef.current) dotRef.current.style.transform = dotRef.current.style.transform.replace('scale', '')
+      if (dotRef.current) dotRef.current.style.scale = isInteractive ? '2' : '1'
+      if (ringRef.current) ringRef.current.style.scale = isInteractive ? '1.6' : '1'
+    }
 
-    window.addEventListener('mousemove', handleMouseMove)
+    // Smooth ring follow via RAF — no setState so no re-renders
+    const animateRing = () => {
+      ringX += (mouseX - ringX) * 0.12
+      ringY += (mouseY - ringY) * 0.12
 
-    const interactives = document.querySelectorAll('a, button, [role="button"], input, textarea, select')
-    interactives.forEach(el => {
-      el.addEventListener('mouseenter', handleMouseEnter)
-      el.addEventListener('mouseleave', handleMouseLeave)
-    })
+      if (ringRef.current) {
+        ringRef.current.style.transform = `translate(${ringX - 18}px, ${ringY - 18}px)`
+        ringRef.current.style.opacity = '1'
+      }
 
-    const observer = new MutationObserver(() => {
-      const newInteractives = document.querySelectorAll('a, button, [role="button"], input, textarea, select')
-      newInteractives.forEach(el => {
-        el.addEventListener('mouseenter', handleMouseEnter)
-        el.addEventListener('mouseleave', handleMouseLeave)
-      })
-    })
+      rafId = requestAnimationFrame(animateRing)
+    }
 
-    observer.observe(document.body, { childList: true, subtree: true })
+    rafId = requestAnimationFrame(animateRing)
+    window.addEventListener('mousemove', onMouseMove)
+    document.addEventListener('mouseover', onMouseOver)
 
     return () => {
-      window.removeEventListener('mousemove', handleMouseMove)
-      observer.disconnect()
+      window.removeEventListener('mousemove', onMouseMove)
+      document.removeEventListener('mouseover', onMouseOver)
+      cancelAnimationFrame(rafId)
     }
   }, [])
 
-  // Only show on desktop
-  if (typeof window !== 'undefined' && window.innerWidth < 768) return null
+  if (isMobile) return null
 
   return (
     <>
-      {/* Dot */}
-      <motion.div
+      <div
+        ref={dotRef}
         className="cursor-dot hidden md:block"
-        animate={{ x: pos.x - 4, y: pos.y - 4, opacity: isVisible ? 1 : 0 }}
-        transition={{ duration: 0.05, ease: 'linear' }}
-        style={{ scale: isHovering ? 1.5 : 1 }}
+        style={{ opacity: 0 }}
       />
-      {/* Ring */}
-      <motion.div
+      <div
+        ref={ringRef}
         className="cursor-ring hidden md:block"
-        animate={{
-          x: pos.x - 18,
-          y: pos.y - 18,
-          opacity: isVisible ? 1 : 0,
-          scale: isHovering ? 1.6 : 1,
-        }}
-        transition={{ duration: 0.12, ease: 'linear' }}
+        style={{ opacity: 0 }}
       />
     </>
   )
