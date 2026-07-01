@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { motion } from 'framer-motion'
 import { Zap, ShoppingBag } from 'lucide-react'
 import { products } from '@/data/products'
@@ -8,13 +8,12 @@ import { useDispatch } from 'react-redux'
 import { addToCart } from '@/store/cartSlice'
 import toast from 'react-hot-toast'
 
-function useCountdown(targetDate: Date) {
+function useCountdown(targetMs: number) {
   const [timeLeft, setTimeLeft] = useState({ hours: 0, minutes: 0, seconds: 0 })
 
   useEffect(() => {
     const update = () => {
-      const now = new Date().getTime()
-      const diff = targetDate.getTime() - now
+      const diff = targetMs - Date.now()
       if (diff <= 0) return
       setTimeLeft({
         hours: Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
@@ -25,7 +24,7 @@ function useCountdown(targetDate: Date) {
     update()
     const id = setInterval(update, 1000)
     return () => clearInterval(id)
-  }, [targetDate])
+  }, [targetMs])
 
   return timeLeft
 }
@@ -48,8 +47,9 @@ function TimeUnit({ value, label }: { value: number; label: string }) {
 
 export default function FlashSaleSection() {
   const dispatch = useDispatch()
-  const saleEnd = new Date(Date.now() + 6 * 60 * 60 * 1000 + 23 * 60 * 1000)
-  const { hours, minutes, seconds } = useCountdown(saleEnd)
+  // useMemo se fixed timestamp — har render pe naya Date nahi banega
+  const saleEndMs = useMemo(() => Date.now() + 6 * 60 * 60 * 1000 + 23 * 60 * 1000, [])
+  const { hours, minutes, seconds } = useCountdown(saleEndMs)
 
   const saleProducts = products.filter(p => p.badge === 'sale' || p.discount).slice(0, 4)
 
