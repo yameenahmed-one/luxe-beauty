@@ -9,12 +9,12 @@ import CustomCursor from '@/components/ui/CustomCursor'
 import FloatingCTA from '@/components/ui/FloatingCTA'
 
 export const metadata: Metadata = {
-  title: 'Luxe Beauty — Premium Luxury Cosmetics & Makeup',
-  description: 'Shop world-class luxury beauty. Authentic products from Charlotte Tilbury, Rare Beauty, Huda Beauty, Fenty Beauty and more.',
-  keywords: 'luxury beauty, makeup, cosmetics, lipstick, foundation, eyeshadow, skincare',
+  title: 'Luxe Beauty Pakistan — Premium Luxury Cosmetics & Makeup',
+  description: 'Pakistan\'s #1 luxury beauty store. Authentic products from Charlotte Tilbury, Rare Beauty, Huda Beauty, Fenty Beauty. Nationwide delivery. Pay via EasyPaisa, JazzCash & COD.',
+  keywords: 'luxury beauty pakistan, makeup pakistan, cosmetics, lipstick, foundation, karachi beauty store',
   openGraph: {
-    title: 'Luxe Beauty — Premium Luxury Cosmetics & Makeup',
-    description: 'Your destination for world-class luxury beauty.',
+    title: 'Luxe Beauty Pakistan — Premium Luxury Cosmetics & Makeup',
+    description: 'Pakistan\'s destination for world-class luxury beauty.',
     type: 'website',
   },
 }

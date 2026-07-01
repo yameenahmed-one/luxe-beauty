@@ -21,9 +21,9 @@ export default function Footer() {
   ]
 
   const features = [
-    { icon: Truck, title: 'Free Shipping', desc: 'On orders over ₹999' },
+    { icon: Truck, title: 'Free Delivery', desc: 'On orders over Rs. 2,000' },
     { icon: Shield, title: 'Authentic Products', desc: '100% genuine guaranteed' },
-    { icon: RefreshCw, title: 'Easy Returns', desc: '30-day return policy' },
+    { icon: RefreshCw, title: 'Easy Returns', desc: '7-day return policy' },
     { icon: CreditCard, title: 'Secure Payment', desc: 'SSL encrypted checkout' },
   ]
 
@@ -83,15 +83,15 @@ export default function Footer() {
             <div className="mt-8 space-y-2">
               <div className="flex items-center gap-2 text-sm text-gray-400">
                 <MapPin className="w-4 h-4 text-primary flex-shrink-0" />
-                <span>123 Beauty Lane, Mumbai, India</span>
+                <span>Shop #12, Zainab Market, Karachi, Pakistan</span>
               </div>
               <div className="flex items-center gap-2 text-sm text-gray-400">
                 <Phone className="w-4 h-4 text-primary flex-shrink-0" />
-                <span>+91 98765 43210</span>
+                <span>+92 300 1234567</span>
               </div>
               <div className="flex items-center gap-2 text-sm text-gray-400">
                 <Mail className="w-4 h-4 text-primary flex-shrink-0" />
-                <span>hello@luxebeauty.in</span>
+                <span>hello@luxebeauty.pk</span>
               </div>
             </div>
           </div>
@@ -143,10 +143,10 @@ export default function Footer() {
         {/* Bottom */}
         <div className="mt-12 pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-gray-400 text-sm font-poppins">
-            © 2024 Luxe Beauty. All rights reserved. Made with ❤️ for beauty lovers.
+            © 2024 Luxe Beauty Pakistan. All rights reserved. Made with ❤️ for beauty lovers.
           </p>
           <div className="flex items-center gap-3">
-            {['visa', 'mastercard', 'upi', 'paytm', 'gpay'].map((pay) => (
+            {['visa', 'mastercard', 'easypaisa', 'jazzcash', 'cod'].map((pay) => (
               <div key={pay} className="px-3 py-1.5 bg-white/10 rounded-lg text-xs text-gray-400 uppercase font-bold tracking-wider">
                 {pay}
               </div>

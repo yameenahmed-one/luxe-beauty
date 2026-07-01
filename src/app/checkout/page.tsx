@@ -25,7 +25,7 @@ export default function CheckoutPage() {
   const dispatch = useDispatch()
   const router = useRouter()
 
-  const shipping = total >= 999 ? 0 : 99
+  const shipping = total >= 2000 ? 0 : 200
   const tax = Math.round(total * 0.18)
   const grandTotal = total + shipping + tax
 
@@ -97,14 +97,14 @@ export default function CheckoutPage() {
 
                   <div className="grid grid-cols-2 gap-4">
                     {[
-                      { name: 'firstName', label: 'First Name', placeholder: 'Priya', col: 1 },
-                      { name: 'lastName', label: 'Last Name', placeholder: 'Sharma', col: 1 },
-                      { name: 'email', label: 'Email Address', placeholder: 'priya@email.com', col: 2 },
-                      { name: 'phone', label: 'Phone Number', placeholder: '+91 98765 43210', col: 1 },
-                      { name: 'pincode', label: 'PIN Code', placeholder: '400001', col: 1 },
-                      { name: 'address', label: 'Address', placeholder: '123 Beauty Lane, Apartment 4B', col: 2 },
-                      { name: 'city', label: 'City', placeholder: 'Mumbai', col: 1 },
-                      { name: 'state', label: 'State', placeholder: 'Maharashtra', col: 1 },
+                      { name: 'firstName', label: 'First Name', placeholder: 'Ahmed', col: 1 },
+                      { name: 'lastName', label: 'Last Name', placeholder: 'Khan', col: 1 },
+                      { name: 'email', label: 'Email Address', placeholder: 'ahmed@email.com', col: 2 },
+                      { name: 'phone', label: 'Phone Number', placeholder: '+92 300 1234567', col: 1 },
+                      { name: 'pincode', label: 'Postal Code', placeholder: '75500', col: 1 },
+                      { name: 'address', label: 'Address', placeholder: 'House #12, Block B, Gulshan-e-Iqbal', col: 2 },
+                      { name: 'city', label: 'City', placeholder: 'Karachi', col: 1 },
+                      { name: 'state', label: 'Province', placeholder: 'Sindh', col: 1 },
                     ].map((field) => (
                       <div key={field.name} className={field.col === 2 ? 'col-span-2' : ''}>
                         <label className="block text-xs font-poppins font-semibold text-gray-500 uppercase tracking-wider mb-2">
@@ -153,7 +153,8 @@ export default function CheckoutPage() {
                   <div className="grid grid-cols-3 gap-3 mb-6">
                     {[
                       { id: 'card', label: 'Credit/Debit Card', icon: '💳' },
-                      { id: 'upi', label: 'UPI', icon: '📱' },
+                      { id: 'easypaisa', label: 'EasyPaisa', icon: '📱' },
+                      { id: 'jazzcash', label: 'JazzCash', icon: '🎵' },
                       { id: 'cod', label: 'Cash on Delivery', icon: '🏠' },
                     ].map((method) => (
                       <motion.button
@@ -227,17 +228,24 @@ export default function CheckoutPage() {
                     </motion.div>
                   )}
 
-                  {form.paymentMethod === 'upi' && (
+                  {form.paymentMethod === 'easypaisa' && (
                     <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}>
-                      <label className="block text-xs font-poppins font-semibold text-gray-500 uppercase tracking-wider mb-2">UPI ID</label>
-                      <input placeholder="yourname@paytm" className="w-full px-4 py-3 border border-secondary rounded-xl font-poppins text-sm focus:outline-none focus:border-primary" />
+                      <label className="block text-xs font-poppins font-semibold text-gray-500 uppercase tracking-wider mb-2">EasyPaisa Number</label>
+                      <input placeholder="+92 300 1234567" className="w-full px-4 py-3 border border-secondary rounded-xl font-poppins text-sm focus:outline-none focus:border-primary" />
+                    </motion.div>
+                  )}
+
+                  {form.paymentMethod === 'jazzcash' && (
+                    <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}>
+                      <label className="block text-xs font-poppins font-semibold text-gray-500 uppercase tracking-wider mb-2">JazzCash Number</label>
+                      <input placeholder="+92 300 1234567" className="w-full px-4 py-3 border border-secondary rounded-xl font-poppins text-sm focus:outline-none focus:border-primary" />
                     </motion.div>
                   )}
 
                   {form.paymentMethod === 'cod' && (
                     <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
                       className="p-4 bg-amber-50 border border-amber-200 rounded-2xl text-sm font-poppins text-amber-700">
-                      💡 Pay in cash when your order is delivered. Extra ₹40 COD fee applies.
+                      💡 Pay in cash when your order is delivered. Extra Rs.40 COD fee applies.
                     </motion.div>
                   )}
 
@@ -287,7 +295,7 @@ export default function CheckoutPage() {
                           <p className="text-xs text-gray-400">{item.product.brand} · Qty: {item.quantity}</p>
                         </div>
                         <span className="font-playfair font-bold text-primary">
-                          ₹{(item.product.price * item.quantity).toLocaleString()}
+                          Rs.{(item.product.price * item.quantity).toLocaleString()}
                         </span>
                       </div>
                     ))}
@@ -318,7 +326,7 @@ export default function CheckoutPage() {
                       className="flex-1 btn-luxury ripple py-4 flex items-center justify-center gap-2 text-base"
                     >
                       <Lock className="w-4 h-4" />
-                      Place Order · ₹{grandTotal.toLocaleString()}
+                      Place Order · Rs.{grandTotal.toLocaleString()}
                     </motion.button>
                   </div>
                 </motion.div>
@@ -344,27 +352,27 @@ export default function CheckoutPage() {
                       <p className="text-xs text-gray-400">{item.product.brand}</p>
                     </div>
                     <span className="text-sm font-poppins font-semibold text-dark whitespace-nowrap">
-                      ₹{(item.product.price * item.quantity).toLocaleString()}
+                      Rs.{(item.product.price * item.quantity).toLocaleString()}
                     </span>
                   </div>
                 ))}
               </div>
               <div className="border-t border-secondary/30 pt-4 space-y-2 text-sm font-poppins">
                 <div className="flex justify-between text-gray-500">
-                  <span>Subtotal</span><span>₹{total.toLocaleString()}</span>
+                  <span>Subtotal</span><span>Rs.{total.toLocaleString()}</span>
                 </div>
                 <div className="flex justify-between text-gray-500">
                   <span>Shipping</span>
                   <span className={shipping === 0 ? 'text-green-500 font-semibold' : ''}>
-                    {shipping === 0 ? 'FREE' : `₹${shipping}`}
+                    {shipping === 0 ? 'FREE' : `Rs.${shipping}`}
                   </span>
                 </div>
                 <div className="flex justify-between text-gray-500">
-                  <span>GST (18%)</span><span>₹{tax.toLocaleString()}</span>
+                  <span>GST (18%)</span><span>Rs.{tax.toLocaleString()}</span>
                 </div>
                 <div className="flex justify-between font-playfair font-bold text-lg pt-2 border-t border-secondary/30">
                   <span>Total</span>
-                  <span className="text-primary">₹{grandTotal.toLocaleString()}</span>
+                  <span className="text-primary">Rs.{grandTotal.toLocaleString()}</span>
                 </div>
               </div>
               <div className="mt-4 flex items-center justify-center gap-2 text-xs text-gray-400 font-poppins">

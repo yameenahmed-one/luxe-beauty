@@ -120,7 +120,7 @@ export default function DashboardPage() {
                       { label: 'Total Orders', value: '12', icon: ShoppingBag, color: 'bg-primary/10 text-primary' },
                       { label: 'Wishlist Items', value: String(wishlist.length), icon: Heart, color: 'bg-pink-100 text-pink-600' },
                       { label: 'Reward Points', value: '2,450', icon: Sparkles, color: 'bg-gold/10 text-gold' },
-                      { label: 'Total Saved', value: '₹3,240', icon: TrendingUp, color: 'bg-green-100 text-green-600' },
+                      { label: 'Total Saved', value: 'Rs.3,240', icon: TrendingUp, color: 'bg-green-100 text-green-600' },
                     ].map((stat) => (
                       <div key={stat.label} className="bg-white rounded-2xl p-5 shadow-card">
                         <div className={`w-10 h-10 rounded-xl flex items-center justify-center mb-3 ${stat.color}`}>
@@ -156,7 +156,7 @@ export default function DashboardPage() {
                             <span className={`px-2.5 py-1 rounded-full text-[10px] font-poppins font-bold ${statusColors[order.status]}`}>
                               {order.status}
                             </span>
-                            <p className="text-sm font-playfair font-bold text-dark mt-1">₹{order.total.toLocaleString()}</p>
+                            <p className="text-sm font-playfair font-bold text-dark mt-1">Rs.{order.total.toLocaleString()}</p>
                           </div>
                         </div>
                       ))}
@@ -173,7 +173,7 @@ export default function DashboardPage() {
                           <span className="text-xs font-poppins font-semibold text-gold uppercase tracking-wider">Luxe Rewards</span>
                         </div>
                         <p className="font-playfair text-2xl font-bold mb-1">2,450 Points</p>
-                        <p className="text-gray-400 text-sm font-poppins">₹245 value · 550 points to next tier</p>
+                        <p className="text-gray-400 text-sm font-poppins">Rs.245 value · 550 points to next tier</p>
                         <div className="mt-3 h-2 bg-white/20 rounded-full w-48">
                           <div className="h-full w-[82%] bg-gradient-to-r from-gold to-primary rounded-full" />
                         </div>
@@ -211,7 +211,7 @@ export default function DashboardPage() {
                           ))}
                         </div>
                         <div className="flex items-center justify-between pt-4 border-t border-secondary/30">
-                          <span className="font-playfair font-bold text-lg text-dark">₹{order.total.toLocaleString()}</span>
+                          <span className="font-playfair font-bold text-lg text-dark">Rs.{order.total.toLocaleString()}</span>
                           <div className="flex gap-2">
                             <motion.button
                               whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}

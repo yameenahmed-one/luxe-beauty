@@ -94,7 +94,7 @@ export default function TrackOrderPage() {
                     </div>
                   </div>
                   <span className="font-playfair font-bold text-primary text-lg">
-                    ₹{result.product.price.toLocaleString()}
+                    Rs.{result.product.price.toLocaleString()}
                   </span>
                 </div>
               </div>

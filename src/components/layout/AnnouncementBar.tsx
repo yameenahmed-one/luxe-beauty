@@ -2,16 +2,16 @@
 
 export default function AnnouncementBar() {
   const messages = [
-    '✨ FREE SHIPPING ON ORDERS OVER ₹999',
+    '✨ FREE DELIVERY ON ORDERS OVER Rs. 2,000',
     '💄 NEW ARRIVALS: Charlotte Tilbury Holiday Collection',
     '🎁 BUY 2 GET 1 FREE ON ALL LIPSTICKS',
-    '🌸 EXCLUSIVE: Rare Beauty Soft Pinch Now Available',
+    '🌸 EXCLUSIVE: Rare Beauty Soft Pinch Now Available in Pakistan',
     '💎 LUXURY GIFT WRAPPING ON ALL ORDERS',
-    '✨ FREE SHIPPING ON ORDERS OVER ₹999',
+    '🚚 NATIONWIDE DELIVERY ACROSS PAKISTAN',
+    '💳 PAY VIA EASYPAISA, JAZZCASH OR CASH ON DELIVERY',
+    '✨ FREE DELIVERY ON ORDERS OVER Rs. 2,000',
     '💄 NEW ARRIVALS: Charlotte Tilbury Holiday Collection',
     '🎁 BUY 2 GET 1 FREE ON ALL LIPSTICKS',
-    '🌸 EXCLUSIVE: Rare Beauty Soft Pinch Now Available',
-    '💎 LUXURY GIFT WRAPPING ON ALL ORDERS',
   ]
 
   return (

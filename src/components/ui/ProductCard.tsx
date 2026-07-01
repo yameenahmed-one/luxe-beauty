@@ -232,11 +232,11 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
             <div className="flex items-center justify-between">
               <div>
                 <span className="font-playfair font-bold text-lg text-dark">
-                  ₹{product.price.toLocaleString()}
+                  Rs.{product.price.toLocaleString()}
                 </span>
                 {product.originalPrice && product.originalPrice > product.price && (
                   <span className="text-xs text-gray-400 line-through ml-2 font-poppins">
-                    ₹{product.originalPrice.toLocaleString()}
+                    Rs.{product.originalPrice.toLocaleString()}
                   </span>
                 )}
               </div>

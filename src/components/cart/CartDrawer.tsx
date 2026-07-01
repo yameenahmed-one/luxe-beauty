@@ -124,7 +124,7 @@ export default function CartDrawer() {
                             </motion.button>
                           </div>
                           <span className="font-playfair font-bold text-primary">
-                            ₹{(item.product.price * item.quantity).toLocaleString()}
+                            Rs.{(item.product.price * item.quantity).toLocaleString()}
                           </span>
                         </div>
                       </div>
@@ -163,7 +163,7 @@ export default function CartDrawer() {
                 <div className="space-y-2">
                   <div className="flex justify-between text-sm font-poppins text-gray-500">
                     <span>Subtotal</span>
-                    <span>₹{total.toLocaleString()}</span>
+                    <span>Rs.{total.toLocaleString()}</span>
                   </div>
                   <div className="flex justify-between text-sm font-poppins text-gray-500">
                     <span>Shipping</span>
@@ -171,7 +171,7 @@ export default function CartDrawer() {
                   </div>
                   <div className="flex justify-between font-playfair font-bold text-lg border-t border-secondary/30 pt-2">
                     <span>Total</span>
-                    <span className="text-primary">₹{total.toLocaleString()}</span>
+                    <span className="text-primary">Rs.{total.toLocaleString()}</span>
                   </div>
                 </div>
 

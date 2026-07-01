@@ -104,8 +104,8 @@ function ShopContent() {
           className="w-full accent-primary"
         />
         <div className="flex justify-between text-sm text-gray-500 font-poppins mt-2">
-          <span>₹0</span>
-          <span className="font-semibold text-primary">₹{priceRange[1].toLocaleString()}</span>
+          <span>Rs.0</span>
+          <span className="font-semibold text-primary">Rs.{priceRange[1].toLocaleString()}</span>
         </div>
       </div>
 

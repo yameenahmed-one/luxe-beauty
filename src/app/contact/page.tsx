@@ -6,10 +6,10 @@ import { MapPin, Phone, Mail, Clock, Send, Sparkles, MessageCircle } from 'lucid
 import toast from 'react-hot-toast'
 
 const contacts = [
-  { icon: MapPin, title: 'Visit Us', lines: ['123 Beauty Lane, Bandra West', 'Mumbai, Maharashtra 400050'] },
-  { icon: Phone, title: 'Call Us', lines: ['+91 98765 43210', '+91 22 1234 5678'] },
-  { icon: Mail, title: 'Email Us', lines: ['hello@luxebeauty.in', 'support@luxebeauty.in'] },
-  { icon: Clock, title: 'Working Hours', lines: ['Mon–Sat: 9am–8pm', 'Sunday: 10am–6pm'] },
+  { icon: MapPin, title: 'Visit Us', lines: ['Shop #12, Zainab Market', 'Karachi, Sindh, Pakistan'] },
+  { icon: Phone, title: 'Call Us', lines: ['+92 300 1234567', '+92 21 3456 7890'] },
+  { icon: Mail, title: 'Email Us', lines: ['hello@luxebeauty.pk', 'support@luxebeauty.pk'] },
+  { icon: Clock, title: 'Working Hours', lines: ['Mon–Sat: 10am–9pm', 'Sunday: 12pm–7pm'] },
 ]
 
 export default function ContactPage() {

@@ -147,9 +147,9 @@ export default function FlashSaleSection() {
 
                   <div className="flex items-center justify-between">
                     <div>
-                      <span className="font-playfair font-bold text-lg text-white">₹{product.price.toLocaleString()}</span>
+                      <span className="font-playfair font-bold text-lg text-white">Rs.{product.price.toLocaleString()}</span>
                       {product.originalPrice && (
-                        <span className="text-xs text-gray-500 line-through ml-2">₹{product.originalPrice.toLocaleString()}</span>
+                        <span className="text-xs text-gray-500 line-through ml-2">Rs.{product.originalPrice.toLocaleString()}</span>
                       )}
                     </div>
                     <motion.button

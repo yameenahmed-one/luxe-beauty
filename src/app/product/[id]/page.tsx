@@ -35,7 +35,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
     { id: 'description', title: 'Description', content: product.description || 'A luxurious premium beauty product crafted with the finest ingredients for flawless results.' },
     { id: 'ingredients', title: 'Ingredients', content: 'Water, Cyclopentasiloxane, Dimethicone, Glycerin, Niacinamide, Vitamin E, Hyaluronic Acid, Retinol, SPF 30. Cruelty-free and vegan formulation.' },
     { id: 'howto', title: 'How To Use', content: 'Apply a small amount to clean, moisturized skin. Blend outward using fingertips or a brush. Build coverage as desired. Set with powder for longevity.' },
-    { id: 'shipping', title: 'Shipping & Returns', content: 'Free shipping on orders over ₹999. Delivery in 2-5 business days. Easy 30-day returns on all products.' },
+    { id: 'shipping', title: 'Shipping & Returns', content: 'Free shipping on orders over Rs.999. Delivery in 2-5 business days. Easy 30-day returns on all products.' },
   ]
 
   return (
@@ -133,12 +133,12 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
 
             {/* Price */}
             <div className="flex items-end gap-3">
-              <span className="font-playfair text-4xl font-bold text-dark">₹{product.price.toLocaleString()}</span>
+              <span className="font-playfair text-4xl font-bold text-dark">Rs.{product.price.toLocaleString()}</span>
               {product.originalPrice && product.originalPrice > product.price && (
                 <>
-                  <span className="text-xl text-gray-400 line-through font-poppins">₹{product.originalPrice.toLocaleString()}</span>
+                  <span className="text-xl text-gray-400 line-through font-poppins">Rs.{product.originalPrice.toLocaleString()}</span>
                   <span className="px-2 py-1 bg-green-100 text-green-600 text-xs font-poppins font-bold rounded-full">
-                    Save ₹{(product.originalPrice - product.price).toLocaleString()}
+                    Save Rs.{(product.originalPrice - product.price).toLocaleString()}
                   </span>
                 </>
               )}
@@ -244,7 +244,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
             {/* Trust badges */}
             <div className="grid grid-cols-3 gap-3">
               {[
-                { icon: Truck, text: 'Free Delivery', sub: 'Over ₹999' },
+                { icon: Truck, text: 'Free Delivery', sub: 'Over Rs.999' },
                 { icon: Shield, text: 'Authentic', sub: '100% Genuine' },
                 { icon: RefreshCw, text: 'Easy Return', sub: '30 Days' },
               ].map((item) => (
