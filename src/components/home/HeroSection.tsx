@@ -136,7 +136,7 @@ export default function HeroSection() {
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-h-screen flex items-center">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center w-full pt-24 pb-12">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center w-full py-16">
           {/* Content */}
           <AnimatePresence mode="wait">
             <motion.div
@@ -164,7 +164,7 @@ export default function HeroSection() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.2 }}
-                  className="font-playfair text-5xl sm:text-6xl lg:text-7xl font-bold text-dark leading-tight"
+                  className="font-playfair text-4xl sm:text-5xl lg:text-6xl font-bold text-dark leading-tight"
                 >
                   {slide.title}
                 </motion.h1>
@@ -172,7 +172,7 @@ export default function HeroSection() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.3 }}
-                  className="font-playfair text-5xl sm:text-6xl lg:text-7xl font-bold gradient-text leading-tight"
+                  className="font-playfair text-4xl sm:text-5xl lg:text-6xl font-bold gradient-text leading-tight"
                 >
                   {slide.highlight}
                 </motion.h1>

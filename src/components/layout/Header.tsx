@@ -3,60 +3,50 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
-import {
-  Search, ShoppingBag, Heart, User, Menu, X, ChevronDown,
-  Sun, Moon, Globe, DollarSign, Sparkles
-} from 'lucide-react'
+import { Search, ShoppingBag, Heart, User, Menu, X, ChevronDown, Sun, Moon, Sparkles } from 'lucide-react'
 import { useSelector, useDispatch } from 'react-redux'
 import { selectCartCount, toggleCart } from '@/store/cartSlice'
 import { selectWishlistItems } from '@/store/wishlistSlice'
 import { categories } from '@/data/products'
 
 export default function Header() {
-  const [isScrolled, setIsScrolled] = useState(false)
+  const [isScrolled, setIsScrolled]     = useState(false)
   const [isMobileOpen, setIsMobileOpen] = useState(false)
-  const [isDark, setIsDark] = useState(false)
+  const [isDark, setIsDark]             = useState(false)
   const [isSearchOpen, setIsSearchOpen] = useState(false)
-  const [searchQuery, setSearchQuery] = useState('')
-  const [activeMega, setActiveMega] = useState<string | null>(null)
+  const [searchQuery, setSearchQuery]   = useState('')
+  const [activeMega, setActiveMega]     = useState<string | null>(null)
 
-  const dispatch = useDispatch()
-  const cartCount = useSelector(selectCartCount)
+  const dispatch     = useDispatch()
+  const cartCount    = useSelector(selectCartCount)
   const wishlistItems = useSelector(selectWishlistItems)
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 20)
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
+    const onScroll = () => setIsScrolled(window.scrollY > 20)
+    window.addEventListener('scroll', onScroll)
+    return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
   const navLinks = [
-    { label: 'Home', href: '/' },
-    { label: 'Shop', href: '/shop', mega: true },
+    { label: 'Home',       href: '/' },
+    { label: 'Shop',       href: '/shop', mega: true },
     { label: 'Categories', href: '/categories' },
-    { label: 'Brands', href: '/brands' },
-    { label: 'Blog', href: '/blog' },
-    { label: 'About', href: '/about' },
+    { label: 'Brands',     href: '/brands' },
+    { label: 'Blog',       href: '/blog' },
+    { label: 'About',      href: '/about' },
   ]
 
   return (
     <>
-      <motion.header
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          isScrolled
-            ? 'bg-white/95 backdrop-blur-xl shadow-luxury border-b border-secondary/30'
-            : 'bg-transparent'
-        }`}
-      >
+      <header className={`w-full transition-all duration-300 ${
+        isScrolled ? 'bg-white shadow-lg border-b border-pink-100' : 'bg-white border-b border-pink-100'
+      }`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
+
             {/* Logo */}
-            <Link href="/" className="flex items-center gap-2 group">
-              <motion.div whileHover={{ rotate: 360 }} transition={{ duration: 0.6 }}>
-                <Sparkles className="w-7 h-7 text-primary" />
-              </motion.div>
+            <Link href="/" className="flex items-center gap-2 flex-shrink-0">
+              <Sparkles className="w-7 h-7 text-primary" />
               <span className="font-playfair text-2xl font-bold gradient-text">LUXE BEAUTY</span>
             </Link>
 
@@ -66,125 +56,100 @@ export default function Header() {
                 <div
                   key={link.label}
                   className="relative"
-                  onMouseEnter={() => link.mega && setActiveMega(link.label)}
+                  onMouseEnter={() => link.mega ? setActiveMega(link.label) : null}
                   onMouseLeave={() => setActiveMega(null)}
                 >
                   <Link
                     href={link.href}
-                    className="flex items-center gap-1 text-dark font-poppins text-sm font-medium hover:text-primary transition-colors duration-200 py-2"
+                    className="flex items-center gap-1 text-dark font-poppins text-sm font-medium hover:text-primary transition-colors py-2"
                   >
                     {link.label}
                     {link.mega && <ChevronDown className="w-3 h-3" />}
                   </Link>
-                  {/* Underline hover */}
-                  <motion.div
-                    className="absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-primary to-gold"
-                    initial={{ width: 0 }}
-                    whileHover={{ width: '100%' }}
-                    transition={{ duration: 0.2 }}
-                  />
+                  <div className="absolute bottom-0 left-0 h-0.5 w-0 bg-gradient-to-r from-primary to-gold hover:w-full transition-all duration-300" />
                 </div>
               ))}
             </nav>
 
             {/* Actions */}
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-3">
               {/* Search */}
-              <motion.button
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
+              <button
                 onClick={() => setIsSearchOpen(!isSearchOpen)}
-                className="p-2 hover:text-primary transition-colors"
+                className="p-2 hover:text-primary transition-colors text-dark"
               >
                 <Search className="w-5 h-5" />
-              </motion.button>
+              </button>
 
               {/* Dark mode */}
-              <motion.button
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
+              <button
                 onClick={() => setIsDark(!isDark)}
-                className="p-2 hover:text-primary transition-colors hidden md:flex"
+                className="p-2 hover:text-primary transition-colors hidden md:flex text-dark"
               >
                 {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
-              </motion.button>
+              </button>
 
               {/* Wishlist */}
-              <Link href="/wishlist">
-                <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }} className="relative p-2 hover:text-primary transition-colors">
-                  <Heart className="w-5 h-5" />
-                  {wishlistItems.length > 0 && (
-                    <motion.span
-                      initial={{ scale: 0 }}
-                      animate={{ scale: 1 }}
-                      className="absolute -top-1 -right-1 bg-primary text-white text-xs w-4 h-4 rounded-full flex items-center justify-center font-bold"
-                    >
-                      {wishlistItems.length}
-                    </motion.span>
-                  )}
-                </motion.div>
+              <Link href="/wishlist" className="relative p-2 hover:text-primary transition-colors text-dark">
+                <Heart className="w-5 h-5" />
+                {wishlistItems.length > 0 && (
+                  <span className="absolute -top-0.5 -right-0.5 bg-primary text-white text-xs w-4 h-4 rounded-full flex items-center justify-center font-bold">
+                    {wishlistItems.length}
+                  </span>
+                )}
               </Link>
 
               {/* Cart */}
-              <motion.button
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
+              <button
                 onClick={() => dispatch(toggleCart())}
-                className="relative p-2 hover:text-primary transition-colors"
+                className="relative p-2 hover:text-primary transition-colors text-dark"
               >
                 <ShoppingBag className="w-5 h-5" />
                 {cartCount > 0 && (
-                  <motion.span
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    className="absolute -top-1 -right-1 bg-primary text-white text-xs w-4 h-4 rounded-full flex items-center justify-center font-bold"
-                  >
+                  <span className="absolute -top-0.5 -right-0.5 bg-primary text-white text-xs w-4 h-4 rounded-full flex items-center justify-center font-bold">
                     {cartCount}
-                  </motion.span>
+                  </span>
                 )}
-              </motion.button>
+              </button>
 
               {/* Profile */}
-              <Link href="/dashboard">
-                <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }} className="p-2 hover:text-primary transition-colors hidden md:flex">
-                  <User className="w-5 h-5" />
-                </motion.div>
+              <Link href="/dashboard" className="p-2 hover:text-primary transition-colors hidden md:flex text-dark">
+                <User className="w-5 h-5" />
               </Link>
 
-              {/* Mobile menu */}
-              <motion.button
-                whileTap={{ scale: 0.95 }}
+              {/* Mobile menu toggle */}
+              <button
                 onClick={() => setIsMobileOpen(!isMobileOpen)}
-                className="p-2 lg:hidden"
+                className="p-2 lg:hidden text-dark"
               >
                 {isMobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-              </motion.button>
+              </button>
             </div>
           </div>
         </div>
 
-        {/* Mega Menu - Shop */}
+        {/* Mega Menu */}
         <AnimatePresence>
           {activeMega === 'Shop' && (
             <motion.div
-              initial={{ opacity: 0, y: -10 }}
+              initial={{ opacity: 0, y: -8 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
+              exit={{ opacity: 0, y: -8 }}
               transition={{ duration: 0.2 }}
               onMouseEnter={() => setActiveMega('Shop')}
               onMouseLeave={() => setActiveMega(null)}
-              className="absolute left-0 right-0 bg-white shadow-luxury border-t border-secondary/20"
+              className="absolute left-0 right-0 bg-white shadow-luxury border-t border-pink-100 z-50"
             >
               <div className="max-w-7xl mx-auto px-8 py-8">
                 <div className="grid grid-cols-6 gap-4">
                   {categories.map((cat) => (
                     <Link
                       key={cat.id}
-                      href={`/categories/${cat.name.toLowerCase()}`}
-                      className="flex flex-col items-center gap-2 p-3 rounded-xl hover:bg-secondary/30 transition-colors group"
+                      href={`/shop?category=${cat.name}`}
+                      className="flex flex-col items-center gap-2 p-3 rounded-2xl hover:bg-pink-50 transition-colors group"
                     >
                       <span className="text-2xl">{cat.icon}</span>
-                      <span className="text-xs font-poppins font-medium text-dark group-hover:text-primary transition-colors">{cat.name}</span>
+                      <span className="text-xs font-poppins font-medium text-dark group-hover:text-primary transition-colors text-center">{cat.name}</span>
                       <span className="text-xs text-gray-400">{cat.count} items</span>
                     </Link>
                   ))}
@@ -201,15 +166,15 @@ export default function Header() {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
-              className="bg-white border-t border-secondary/20 shadow-lg"
+              className="bg-white border-t border-pink-100"
             >
               <div className="max-w-2xl mx-auto px-4 py-4">
-                <div className="relative flex items-center gap-3 bg-background rounded-full border border-secondary px-5 py-3">
-                  <Search className="w-4 h-4 text-primary" />
+                <div className="flex items-center gap-3 bg-background rounded-full border border-secondary px-5 py-3">
+                  <Search className="w-4 h-4 text-primary flex-shrink-0" />
                   <input
                     autoFocus
                     type="text"
-                    placeholder="Search for products, brands, shades..."
+                    placeholder="Search products, brands, shades..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     className="flex-1 bg-transparent text-sm font-poppins outline-none placeholder:text-gray-400"
@@ -220,72 +185,65 @@ export default function Header() {
                     </button>
                   )}
                 </div>
-                {searchQuery && (
-                  <div className="mt-3 space-y-1">
-                    <p className="text-xs text-gray-400 px-2">Popular searches</p>
-                    {['Velvet Lipstick', 'Foundation SPF', 'Rose Eyeshadow', 'Matte Blush'].filter(s =>
-                      s.toLowerCase().includes(searchQuery.toLowerCase())
-                    ).map(s => (
-                      <motion.div
-                        key={s}
-                        initial={{ opacity: 0, x: -10 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        className="flex items-center gap-2 px-2 py-2 hover:bg-secondary/20 rounded-lg cursor-pointer"
-                      >
-                        <Search className="w-3 h-3 text-gray-400" />
-                        <span className="text-sm text-dark">{s}</span>
-                      </motion.div>
-                    ))}
-                  </div>
-                )}
               </div>
             </motion.div>
           )}
         </AnimatePresence>
+      </header>
 
-        {/* Mobile Menu */}
-        <AnimatePresence>
-          {isMobileOpen && (
+      {/* Mobile Menu */}
+      <AnimatePresence>
+        {isMobileOpen && (
+          <>
             <motion.div
-              initial={{ opacity: 0, x: '100%' }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: '100%' }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsMobileOpen(false)}
+              className="fixed inset-0 bg-black/40 z-40 lg:hidden"
+            />
+            <motion.div
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 25 }}
-              className="fixed inset-0 top-20 bg-white z-40 lg:hidden overflow-y-auto"
+              className="fixed right-0 top-0 bottom-0 w-72 bg-white z-50 overflow-y-auto shadow-2xl lg:hidden"
             >
-              <div className="p-6 space-y-2">
-                {navLinks.map((link, i) => (
-                  <motion.div
-                    key={link.label}
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: i * 0.08 }}
-                  >
+              <div className="p-6">
+                <div className="flex items-center justify-between mb-8">
+                  <span className="font-playfair text-xl font-bold gradient-text">LUXE BEAUTY</span>
+                  <button onClick={() => setIsMobileOpen(false)}>
+                    <X className="w-5 h-5" />
+                  </button>
+                </div>
+                <div className="space-y-1">
+                  {navLinks.map((link) => (
                     <Link
+                      key={link.label}
                       href={link.href}
                       onClick={() => setIsMobileOpen(false)}
-                      className="flex items-center justify-between py-4 border-b border-secondary/30 text-dark font-poppins font-medium hover:text-primary transition-colors"
+                      className="flex items-center justify-between py-3 px-3 rounded-xl font-poppins font-medium text-dark hover:bg-pink-50 hover:text-primary transition-all"
                     >
                       {link.label}
-                      <ChevronDown className="w-4 h-4 opacity-40" />
+                      <ChevronDown className="w-4 h-4 opacity-40 -rotate-90" />
                     </Link>
-                  </motion.div>
-                ))}
-                <div className="pt-6 grid grid-cols-2 gap-3">
+                  ))}
+                </div>
+                <div className="mt-8 grid grid-cols-2 gap-3">
                   <Link href="/wishlist" onClick={() => setIsMobileOpen(false)}
                     className="flex items-center justify-center gap-2 py-3 border border-secondary rounded-xl text-sm font-medium hover:bg-secondary/30">
                     <Heart className="w-4 h-4 text-primary" /> Wishlist
                   </Link>
                   <Link href="/dashboard" onClick={() => setIsMobileOpen(false)}
                     className="flex items-center justify-center gap-2 py-3 border border-secondary rounded-xl text-sm font-medium hover:bg-secondary/30">
-                    <User className="w-4 h-4 text-primary" /> My Account
+                    <User className="w-4 h-4 text-primary" /> Account
                   </Link>
                 </div>
               </div>
             </motion.div>
-          )}
-        </AnimatePresence>
-      </motion.header>
+          </>
+        )}
+      </AnimatePresence>
     </>
   )
 }

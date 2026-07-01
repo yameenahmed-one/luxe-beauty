@@ -40,7 +40,7 @@ export default function FAQPage() {
   })
 
   return (
-    <div className="min-h-screen bg-background pt-28 pb-20">
+    <div className="min-h-screen bg-background pb-20">
       {/* Hero */}
       <div className="max-w-3xl mx-auto px-4 text-center py-16">
         <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}>
@@ -159,3 +159,4 @@ export default function FAQPage() {
     </div>
   )
 }
+

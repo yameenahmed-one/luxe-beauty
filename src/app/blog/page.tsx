@@ -86,7 +86,7 @@ export default function BlogPage() {
   const [featured, ...rest] = posts
 
   return (
-    <div className="min-h-screen bg-background pt-28 pb-20">
+    <div className="min-h-screen bg-background pb-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} className="text-center py-16">
@@ -205,3 +205,4 @@ export default function BlogPage() {
     </div>
   )
 }
+

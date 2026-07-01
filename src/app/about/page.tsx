@@ -27,7 +27,7 @@ const values = [
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen bg-background pt-28 pb-20">
+    <div className="min-h-screen bg-background pb-20">
       {/* Hero */}
       <section className="relative py-20 bg-gradient-to-br from-background via-secondary/20 to-background overflow-hidden">
         <div className="absolute top-10 left-10 w-72 h-72 bg-primary/5 rounded-full blur-3xl" />
@@ -183,3 +183,4 @@ export default function AboutPage() {
     </div>
   )
 }
+

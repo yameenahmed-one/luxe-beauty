@@ -16,7 +16,7 @@ export default function OrderSuccessPage() {
   ]
 
   return (
-    <div className="min-h-screen bg-background pt-28 pb-20 flex items-center justify-center">
+    <div className="min-h-screen bg-background pb-20 flex items-center justify-center">
       <div className="max-w-2xl mx-auto px-4 text-center">
         {/* Success animation */}
         <motion.div
@@ -130,3 +130,4 @@ export default function OrderSuccessPage() {
     </div>
   )
 }
+

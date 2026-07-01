@@ -42,7 +42,7 @@ export default function DashboardPage() {
   const cartItems = useSelector(selectCartItems)
 
   return (
-    <div className="min-h-screen bg-background pt-28 pb-20">
+    <div className="min-h-screen bg-background pb-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-4 gap-8">
           {/* Sidebar */}
@@ -365,3 +365,4 @@ export default function DashboardPage() {
     </div>
   )
 }
+

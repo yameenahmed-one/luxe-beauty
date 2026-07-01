@@ -10,8 +10,8 @@ import FloatingCTA from '@/components/ui/FloatingCTA'
 
 export const metadata: Metadata = {
   title: 'Luxe Beauty — Premium Luxury Cosmetics & Makeup',
-  description: 'Shop world-class luxury beauty. Authentic products from Charlotte Tilbury, Rare Beauty, Huda Beauty, Fenty Beauty and more. Free shipping on orders over ₹999.',
-  keywords: 'luxury beauty, makeup, cosmetics, lipstick, foundation, eyeshadow, skincare, India',
+  description: 'Shop world-class luxury beauty. Authentic products from Charlotte Tilbury, Rare Beauty, Huda Beauty, Fenty Beauty and more.',
+  keywords: 'luxury beauty, makeup, cosmetics, lipstick, foundation, eyeshadow, skincare',
   openGraph: {
     title: 'Luxe Beauty — Premium Luxury Cosmetics & Makeup',
     description: 'Your destination for world-class luxury beauty.',
@@ -19,11 +19,7 @@ export const metadata: Metadata = {
   },
 }
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode
-}>) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <head>
@@ -34,9 +30,13 @@ export default function RootLayout({
       </head>
       <body className="font-poppins bg-background antialiased">
         <Providers>
-          <AnnouncementBar />
-          <Header />
-          <main className="min-h-screen">{children}</main>
+          {/* Fixed top bar: announcement + header */}
+          <div className="fixed top-0 left-0 right-0 z-50">
+            <AnnouncementBar />
+            <Header />
+          </div>
+          {/* Push content below fixed bar: 32px (bar) + 80px (header) = 112px */}
+          <main className="pt-28 min-h-screen">{children}</main>
           <Footer />
           <CartDrawer />
           <CustomCursor />

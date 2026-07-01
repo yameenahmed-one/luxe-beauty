@@ -29,7 +29,7 @@ const brandImages: Record<string, string> = {
 
 export default function BrandsPage() {
   return (
-    <div className="min-h-screen bg-background pt-28 pb-20">
+    <div className="min-h-screen bg-background pb-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} className="text-center py-16">
           <div className="flex items-center justify-center gap-2 mb-4">
@@ -98,3 +98,4 @@ export default function BrandsPage() {
     </div>
   )
 }
+
