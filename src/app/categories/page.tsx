@@ -28,7 +28,7 @@ export default function CategoriesPage() {
               viewport={{ once: true }}
               transition={{ delay: i * 0.06 }}
             >
-              <Link href={`/shop?category=${cat.name.toLowerCase()}`}>
+              <Link href={`/shop?category=${encodeURIComponent(cat.name)}`}>
                 <motion.div
                   whileHover={{ y: -8, scale: 1.02 }}
                   className="group relative rounded-3xl overflow-hidden shadow-card hover:shadow-luxury cursor-pointer bg-white"

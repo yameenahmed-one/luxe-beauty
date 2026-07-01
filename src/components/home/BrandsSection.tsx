@@ -45,7 +45,7 @@ export default function BrandsSection() {
               viewport={{ once: true }}
               transition={{ delay: i * 0.06 }}
             >
-              <Link href={`/brands/${brand.name.toLowerCase().replace(/\s+/g, '-')}`}>
+              <Link href={`/shop?brand=${encodeURIComponent(brand.name)}`}>
                 <motion.div
                   whileHover={{ y: -6, scale: 1.05 }}
                   className="flex flex-col items-center p-5 rounded-3xl border border-secondary/30 bg-background hover:border-primary/30 hover:shadow-card cursor-pointer transition-all duration-300 group"

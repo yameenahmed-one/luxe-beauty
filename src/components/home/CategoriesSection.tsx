@@ -38,7 +38,7 @@ export default function CategoriesSection() {
               viewport={{ once: true }}
               transition={{ delay: i * 0.07, duration: 0.5 }}
             >
-              <Link href={`/categories/${cat.name.toLowerCase()}`}>
+              <Link href={`/shop?category=${encodeURIComponent(cat.name)}`}>
                 <motion.div
                   whileHover={{ y: -8, scale: 1.03 }}
                   transition={{ duration: 0.3 }}
