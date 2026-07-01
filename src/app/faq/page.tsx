@@ -16,9 +16,9 @@ const categories = [
 const faqs = [
   { id: 1, cat: 'shipping', q: 'How long does delivery take?', a: 'Standard delivery takes 3–5 business days. Express delivery (1–2 days) is available for ₹149. Free standard shipping on all orders above ₹999.' },
   { id: 2, cat: 'shipping', q: 'Do you ship internationally?', a: 'Yes! We ship to 25+ countries. International shipping rates and times vary by destination. Check our shipping calculator at checkout.' },
-  { id: 3, cat: 'shipping', q: 'How do I track my order?', a: 'Once your order ships, you'll receive a tracking number via email and SMS. You can also track your order in your account dashboard under "My Orders".' },
+  { id: 3, cat: 'shipping', q: 'How do I track my order?', a: "Once your order ships, you'll receive a tracking number via email and SMS. You can also track your order in your account dashboard under \"My Orders\"." },
   { id: 4, cat: 'returns', q: 'What is your return policy?', a: 'We offer 30-day hassle-free returns on all unopened products. For hygiene reasons, opened products cannot be returned unless defective.' },
-  { id: 5, cat: 'returns', q: 'How do I initiate a return?', a: 'Go to My Account > Orders > Select Order > Request Return. Fill the form and we'll arrange a free pickup within 2 business days.' },
+  { id: 5, cat: 'returns', q: 'How do I initiate a return?', a: "Go to My Account > Orders > Select Order > Request Return. Fill the form and we'll arrange a free pickup within 2 business days." },
   { id: 6, cat: 'returns', q: 'How long does a refund take?', a: 'Refunds are processed within 5–7 business days of receiving the returned product. The amount will be credited to your original payment method.' },
   { id: 7, cat: 'payments', q: 'What payment methods do you accept?', a: 'We accept all major credit/debit cards, UPI, net banking, Paytm, Google Pay, PhonePe, and Cash on Delivery.' },
   { id: 8, cat: 'payments', q: 'Is my payment information secure?', a: 'Absolutely. All transactions are secured with SSL encryption and we never store your card details. We are PCI-DSS compliant.' },

@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { motion } from 'framer-motion'
-import { Sparkles, Instagram, Facebook, Twitter, Youtube, Pinterest, MapPin, Phone, Mail, CreditCard, Truck, Shield, RefreshCw } from 'lucide-react'
+import { Sparkles, MapPin, Phone, Mail, CreditCard, Truck, Shield, RefreshCw } from 'lucide-react'
 
 export default function Footer() {
   const links = {
@@ -13,11 +13,11 @@ export default function Footer() {
   }
 
   const socials = [
-    { icon: Instagram, href: '#', label: 'Instagram' },
-    { icon: Facebook, href: '#', label: 'Facebook' },
-    { icon: Twitter, href: '#', label: 'Twitter' },
-    { icon: Youtube, href: '#', label: 'YouTube' },
-    { icon: Pinterest, href: '#', label: 'Pinterest' },
+    { emoji: '📸', href: '#', label: 'Instagram' },
+    { emoji: '👍', href: '#', label: 'Facebook' },
+    { emoji: '🐦', href: '#', label: 'Twitter' },
+    { emoji: '▶️', href: '#', label: 'YouTube' },
+    { emoji: '📌', href: '#', label: 'Pinterest' },
   ]
 
   const features = [
@@ -72,10 +72,10 @@ export default function Footer() {
                   key={social.label}
                   href={social.href}
                   whileHover={{ scale: 1.15, y: -2 }}
-                  className="p-2.5 rounded-xl bg-white/10 hover:bg-primary transition-all duration-300"
+                  className="p-2.5 rounded-xl bg-white/10 hover:bg-primary transition-all duration-300 text-lg flex items-center justify-center w-10 h-10"
                   aria-label={social.label}
                 >
-                  <social.icon className="w-4 h-4" />
+                  {social.emoji}
                 </motion.a>
               ))}
             </div>

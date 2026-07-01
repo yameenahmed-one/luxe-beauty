@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { MapPin, Phone, Mail, Clock, Send, Sparkles, MessageCircle, Instagram, Facebook, Twitter } from 'lucide-react'
+import { MapPin, Phone, Mail, Clock, Send, Sparkles, MessageCircle } from 'lucide-react'
 import toast from 'react-hot-toast'
 
 const contacts = [
@@ -77,19 +77,19 @@ export default function ContactPage() {
               <p className="font-playfair font-bold text-dark mb-4">Follow Us</p>
               <div className="flex gap-3">
                 {[
-                  { icon: Instagram, color: '#E1306C', label: 'Instagram' },
-                  { icon: Facebook, color: '#1877F2', label: 'Facebook' },
-                  { icon: Twitter, color: '#1DA1F2', label: 'Twitter' },
+                  { emoji: '📸', color: '#E1306C', label: 'Instagram' },
+                  { emoji: '👍', color: '#1877F2', label: 'Facebook' },
+                  { emoji: '🐦', color: '#1DA1F2', label: 'Twitter' },
                 ].map((social) => (
                   <motion.a
                     key={social.label}
                     href="#"
                     whileHover={{ scale: 1.15, y: -2 }}
-                    className="w-10 h-10 rounded-xl flex items-center justify-center text-white transition-all"
+                    className="w-10 h-10 rounded-xl flex items-center justify-center text-lg transition-all"
                     style={{ background: social.color }}
                     aria-label={social.label}
                   >
-                    <social.icon className="w-4 h-4" />
+                    {social.emoji}
                   </motion.a>
                 ))}
               </div>

@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Instagram, Heart, MessageCircle } from 'lucide-react'
+import { Heart, MessageCircle } from 'lucide-react'
 
 const posts = [
   { id: 1, image: 'https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=400&q=80', likes: '12.4K', comments: '234' },
@@ -23,7 +23,7 @@ export default function InstagramFeed() {
           className="text-center mb-12"
         >
           <div className="flex items-center justify-center gap-2 mb-3">
-            <Instagram className="w-5 h-5 text-primary" />
+            <span className="text-xl">📸</span>
             <span className="text-xs font-poppins font-semibold tracking-widest text-primary uppercase">@luxebeautyofficial</span>
           </div>
           <h2 className="font-playfair text-4xl font-bold text-dark mb-3 section-title">
@@ -78,7 +78,7 @@ export default function InstagramFeed() {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-8 py-3 rounded-full border-2 border-primary text-primary font-poppins font-semibold text-sm hover:bg-primary hover:text-white transition-all duration-300"
           >
-            <Instagram className="w-4 h-4" />
+            <span className="text-lg">📸</span>
             Follow on Instagram
           </a>
         </motion.div>
