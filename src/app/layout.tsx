@@ -10,33 +10,22 @@ import FloatingCTA from '@/components/ui/FloatingCTA'
 
 export const metadata: Metadata = {
   title: 'Luxe Beauty Pakistan — Premium Luxury Cosmetics & Makeup',
-  description: 'Pakistan\'s #1 luxury beauty store. Authentic products from Charlotte Tilbury, Rare Beauty, Huda Beauty, Fenty Beauty. Nationwide delivery. Pay via EasyPaisa, JazzCash & COD.',
-  keywords: 'luxury beauty pakistan, makeup pakistan, cosmetics, lipstick, foundation, karachi beauty store',
-  openGraph: {
-    title: 'Luxe Beauty Pakistan — Premium Luxury Cosmetics & Makeup',
-    description: 'Pakistan\'s destination for world-class luxury beauty.',
-    type: 'website',
-  },
+  description: 'Pakistan\'s #1 luxury beauty store. Nationwide delivery. Pay via EasyPaisa, JazzCash & COD.',
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <head>
-        <link
-          href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,700&family=Poppins:wght@300;400;500;600;700;800&display=swap"
-          rel="stylesheet"
-        />
+        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,700&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
       </head>
       <body className="font-poppins bg-background antialiased">
         <Providers>
-          {/* Fixed top bar: announcement + header */}
-          <div className="fixed top-0 left-0 right-0 z-50">
-            <AnnouncementBar />
+          <AnnouncementBar />
+          <div className="sticky top-0 z-50">
             <Header />
           </div>
-          {/* Push content below fixed bar: 32px (bar) + 80px (header) = 112px */}
-          <main className="pt-28 min-h-screen">{children}</main>
+          <main className="min-h-screen">{children}</main>
           <Footer />
           <CartDrawer />
           <CustomCursor />
