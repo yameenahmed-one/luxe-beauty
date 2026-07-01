@@ -13,7 +13,7 @@ export default function FeaturedProducts() {
 
   const filtered = activeTab === 'All'
     ? products
-    : products.filter(p => {
+    : products.filter((p) => {
         const catMap: Record<string, string[]> = {
           Lips: ['Lipstick'],
           Eyes: ['Eyeshadow', 'Mascara'],
@@ -24,7 +24,7 @@ export default function FeaturedProducts() {
       })
 
   return (
-    <section className="py-24 bg-background">
+    <section className="py-20 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
@@ -35,7 +35,9 @@ export default function FeaturedProducts() {
         >
           <div className="flex items-center justify-center gap-2 mb-3">
             <Sparkles className="w-4 h-4 text-primary" />
-            <span className="text-xs font-poppins font-semibold tracking-widest text-primary uppercase">Featured Products</span>
+            <span className="text-xs font-poppins font-semibold tracking-widest text-primary uppercase">
+              Featured Products
+            </span>
             <Sparkles className="w-4 h-4 text-primary" />
           </div>
           <h2 className="font-playfair text-4xl lg:text-5xl font-bold text-dark mb-4 section-title">
@@ -61,7 +63,7 @@ export default function FeaturedProducts() {
               onClick={() => setActiveTab(tab)}
               className={`px-6 py-2.5 rounded-full text-sm font-poppins font-medium transition-all duration-300 ${
                 activeTab === tab
-                  ? 'bg-primary text-white shadow-glow-pink'
+                  ? 'bg-primary text-white shadow-glow-gold'
                   : 'bg-white text-gray-600 border border-secondary/50 hover:border-primary hover:text-primary'
               }`}
             >
@@ -73,19 +75,19 @@ export default function FeaturedProducts() {
         {/* Products Grid */}
         <motion.div
           layout
-          className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"
         >
           {filtered.map((product, i) => (
             <ProductCard key={product.id} product={product} index={i} />
           ))}
         </motion.div>
 
-        {/* Load More */}
+        {/* CTA */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className="text-center mt-12"
+          className="text-center mt-14"
         >
           <motion.a
             href="/shop"

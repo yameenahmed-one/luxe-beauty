@@ -15,9 +15,8 @@ const slides = [
     ctaLink: '/shop',
     tag: 'NEW COLLECTION 2024',
     badge: '✨ Bestseller',
-    bg: 'from-[#FFF8FA] via-[#FFE8F0] to-[#F8D5DF]',
-    accent: '#FF4F81',
-    image: 'https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=800&q=80',
+    accent: '#D4AF37',
+    image: 'https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=600&q=80',
     stats: [{ label: 'Products', value: '2000+' }, { label: 'Brands', value: '50+' }, { label: 'Reviews', value: '100K+' }],
   },
   {
@@ -29,9 +28,8 @@ const slides = [
     ctaLink: '/categories',
     tag: 'LIMITED EDITION',
     badge: '💄 Most Loved',
-    bg: 'from-[#FFF8FA] via-[#FDF0FF] to-[#F3E8FF]',
-    accent: '#D4AF37',
-    image: 'https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=800&q=80',
+    accent: '#DCA8A6',
+    image: 'https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=600&q=80',
     stats: [{ label: 'Happy Clients', value: '500K+' }, { label: 'Countries', value: '25+' }, { label: 'Awards', value: '15' }],
   },
   {
@@ -41,11 +39,10 @@ const slides = [
     subtitle: 'Elevate your beauty ritual with world-class formulas loved by makeup artists globally.',
     cta: 'View Bestsellers',
     ctaLink: '/shop',
-    tag: 'EDITOR\'S PICK',
+    tag: "EDITOR'S PICK",
     badge: '🌟 Top Rated',
-    bg: 'from-[#FFF8FA] via-[#FFF0E8] to-[#FFE8D5]',
-    accent: '#FF4F81',
-    image: 'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=800&q=80',
+    accent: '#D4AF37',
+    image: 'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=600&q=80',
     stats: [{ label: 'Ingredients', value: '100% Natural' }, { label: 'Cruelty Free', value: 'Yes' }, { label: 'Vegan', value: 'Yes' }],
   },
 ]
@@ -80,88 +77,82 @@ export default function HeroSection() {
   const slide = slides[current]
 
   const variants = {
-    enter: (dir: number) => ({ x: dir > 0 ? 100 : -100, opacity: 0 }),
+    enter: (dir: number) => ({ x: dir > 0 ? 80 : -80, opacity: 0 }),
     center: { x: 0, opacity: 1 },
-    exit: (dir: number) => ({ x: dir > 0 ? -100 : 100, opacity: 0 }),
+    exit: (dir: number) => ({ x: dir > 0 ? -80 : 80, opacity: 0 }),
   }
 
   return (
-    <section className="relative min-h-screen overflow-hidden">
-      <AnimatePresence initial={false} custom={direction} mode="wait">
-        <motion.div
-          key={slide.id}
-          custom={direction}
-          variants={variants}
-          initial="enter"
-          animate="center"
-          exit="exit"
-          transition={{ duration: 0.6, ease: [0.43, 0.13, 0.23, 0.96] }}
-          className={`absolute inset-0 bg-gradient-to-br ${slide.bg}`}
-        />
-      </AnimatePresence>
-
-      {/* Floating decorative elements */}
+    <section
+      className="relative min-h-[90vh] overflow-hidden flex items-center"
+      style={{ background: 'linear-gradient(135deg, #FFF5F5 0%, #F7F4EF 100%)' }}
+    >
+      {/* Subtle floating decorative elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
-          animate={{ y: [-20, 20, -20], rotate: [0, 10, 0] }}
+          animate={{ y: [-15, 15, -15], rotate: [0, 8, 0] }}
           transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
-          className="absolute top-24 left-[8%] w-16 h-16 rounded-full opacity-20"
-          style={{ background: `radial-gradient(circle, ${slide.accent}, transparent)` }}
+          className="absolute top-24 left-[6%] w-12 h-12 rounded-full opacity-25"
+          style={{ background: 'radial-gradient(circle, #D4AF37, transparent)' }}
         />
         <motion.div
-          animate={{ y: [20, -20, 20], rotate: [0, -15, 0] }}
-          transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
-          className="absolute top-40 right-[10%] w-24 h-24 rounded-full opacity-15"
-          style={{ background: `radial-gradient(circle, #D4AF37, transparent)` }}
+          animate={{ y: [15, -15, 15], rotate: [0, -10, 0] }}
+          transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
+          className="absolute top-1/3 right-[8%] w-16 h-16 rounded-full opacity-20"
+          style={{ background: 'radial-gradient(circle, #DCA8A6, transparent)' }}
         />
         <motion.div
-          animate={{ scale: [1, 1.2, 1], opacity: [0.1, 0.2, 0.1] }}
-          transition={{ duration: 4, repeat: Infinity }}
-          className="absolute bottom-32 left-[15%] w-32 h-32 rounded-full"
-          style={{ background: `radial-gradient(circle, ${slide.accent}, transparent)` }}
+          animate={{ scale: [1, 1.15, 1], opacity: [0.08, 0.15, 0.08] }}
+          transition={{ duration: 5, repeat: Infinity }}
+          className="absolute bottom-1/4 left-[12%] w-24 h-24 rounded-full"
+          style={{ background: 'radial-gradient(circle, #D4AF37, transparent)' }}
         />
-        {/* Sparkle dots */}
-        {[...Array(8)].map((_, i) => (
+        {[...Array(6)].map((_, i) => (
           <motion.div
             key={i}
-            className="absolute w-1.5 h-1.5 rounded-full bg-primary/30"
+            className="absolute w-1.5 h-1.5 rounded-full"
             style={{
-              top: `${20 + i * 10}%`,
-              left: `${5 + i * 12}%`,
+              top: `${15 + i * 12}%`,
+              left: `${4 + i * 15}%`,
+              background: i % 2 === 0 ? '#D4AF37' : '#DCA8A6',
+              opacity: 0.3,
             }}
-            animate={{ opacity: [0, 1, 0], scale: [0, 1, 0] }}
-            transition={{ duration: 2, repeat: Infinity, delay: i * 0.3 }}
+            animate={{ opacity: [0, 0.4, 0], scale: [0, 1, 0] }}
+            transition={{ duration: 2.5, repeat: Infinity, delay: i * 0.4 }}
           />
         ))}
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-h-screen flex items-center">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center w-full py-16">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-24">
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center w-full">
+
           {/* Content */}
           <AnimatePresence mode="wait">
             <motion.div
               key={`content-${slide.id}`}
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -40 }}
-              transition={{ duration: 0.5 }}
+              custom={direction}
+              variants={variants}
+              initial="enter"
+              animate="center"
+              exit="exit"
+              transition={{ duration: 0.5, ease: [0.43, 0.13, 0.23, 0.96] }}
               className="space-y-6"
             >
-              {/* Tag */}
+              {/* Tag pill */}
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.1 }}
-                className="inline-flex items-center gap-2 px-4 py-2 bg-white/70 backdrop-blur-sm rounded-full border border-primary/20 shadow-sm"
+                className="inline-flex items-center gap-2 px-4 py-2 bg-white/80 backdrop-blur-sm rounded-full border border-primary/25 shadow-sm"
               >
                 <Sparkles className="w-3.5 h-3.5 text-primary" />
                 <span className="text-xs font-poppins font-semibold text-primary tracking-widest">{slide.tag}</span>
               </motion.div>
 
-              {/* Title */}
+              {/* Heading */}
               <div>
                 <motion.h1
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 18 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.2 }}
                   className="font-playfair text-4xl sm:text-5xl lg:text-6xl font-bold text-dark leading-tight"
@@ -169,7 +160,7 @@ export default function HeroSection() {
                   {slide.title}
                 </motion.h1>
                 <motion.h1
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 18 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.3 }}
                   className="font-playfair text-4xl sm:text-5xl lg:text-6xl font-bold gradient-text leading-tight"
@@ -180,17 +171,17 @@ export default function HeroSection() {
 
               {/* Subtitle */}
               <motion.p
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 }}
-                className="text-gray-600 text-lg font-poppins leading-relaxed max-w-lg"
+                className="text-gray-600 text-base lg:text-lg font-poppins leading-relaxed max-w-md"
               >
                 {slide.subtitle}
               </motion.p>
 
               {/* CTAs */}
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5 }}
                 className="flex flex-wrap gap-4"
@@ -199,7 +190,7 @@ export default function HeroSection() {
                   <motion.button
                     whileHover={{ scale: 1.05, y: -2 }}
                     whileTap={{ scale: 0.97 }}
-                    className="btn-luxury ripple text-base px-8 py-4"
+                    className="btn-luxury ripple text-sm px-8 py-3.5"
                   >
                     {slide.cta}
                   </motion.button>
@@ -208,7 +199,7 @@ export default function HeroSection() {
                   <motion.button
                     whileHover={{ scale: 1.05, y: -2 }}
                     whileTap={{ scale: 0.97 }}
-                    className="px-8 py-4 rounded-full border-2 border-primary text-primary font-poppins font-semibold text-sm tracking-wider hover:bg-primary hover:text-white transition-all duration-300"
+                    className="px-8 py-3.5 rounded-full border-2 border-primary text-primary font-poppins font-semibold text-sm tracking-wider hover:bg-primary hover:text-white transition-all duration-300"
                   >
                     Explore Collection
                   </motion.button>
@@ -217,14 +208,14 @@ export default function HeroSection() {
 
               {/* Stats */}
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.6 }}
-                className="flex gap-8 pt-4"
+                className="flex gap-8 pt-2"
               >
                 {slide.stats.map((stat, i) => (
                   <div key={i} className="text-center">
-                    <p className="font-playfair font-bold text-2xl text-dark">{stat.value}</p>
+                    <p className="font-playfair font-bold text-xl text-dark">{stat.value}</p>
                     <p className="text-xs text-gray-500 font-poppins mt-0.5">{stat.label}</p>
                   </div>
                 ))}
@@ -236,25 +227,25 @@ export default function HeroSection() {
           <AnimatePresence mode="wait">
             <motion.div
               key={`img-${slide.id}`}
-              initial={{ opacity: 0, scale: 0.9, rotate: -2 }}
+              initial={{ opacity: 0, scale: 0.92, rotate: -2 }}
               animate={{ opacity: 1, scale: 1, rotate: 0 }}
-              exit={{ opacity: 0, scale: 0.9, rotate: 2 }}
+              exit={{ opacity: 0, scale: 0.92, rotate: 2 }}
               transition={{ duration: 0.6 }}
               className="relative flex justify-center"
             >
               {/* Glow ring */}
               <motion.div
-                animate={{ scale: [1, 1.05, 1], opacity: [0.3, 0.5, 0.3] }}
-                transition={{ duration: 3, repeat: Infinity }}
-                className="absolute inset-0 rounded-full"
-                style={{ background: `radial-gradient(circle, ${slide.accent}33 0%, transparent 70%)` }}
+                animate={{ scale: [1, 1.04, 1], opacity: [0.25, 0.4, 0.25] }}
+                transition={{ duration: 4, repeat: Infinity }}
+                className="absolute inset-0 rounded-full pointer-events-none"
+                style={{ background: `radial-gradient(circle, ${slide.accent}44 0%, transparent 65%)` }}
               />
 
-              {/* Main image */}
+              {/* Main image — constrained size */}
               <motion.div
-                animate={{ y: [-8, 8, -8] }}
+                animate={{ y: [-6, 6, -6] }}
                 transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
-                className="relative w-80 h-80 lg:w-[480px] lg:h-[480px] rounded-full overflow-hidden shadow-luxury ring-4 ring-white/50"
+                className="relative w-72 h-72 lg:w-96 lg:h-96 rounded-full overflow-hidden shadow-luxury ring-4 ring-white/60"
               >
                 <img
                   src={slide.image}
@@ -264,12 +255,12 @@ export default function HeroSection() {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent" />
               </motion.div>
 
-              {/* Floating badge */}
+              {/* Floating rating badge */}
               <motion.div
                 initial={{ opacity: 0, scale: 0 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.5 }}
-                className="absolute top-8 -right-4 lg:right-4 glass rounded-2xl px-4 py-3 shadow-luxury"
+                className="absolute top-6 -right-2 lg:right-2 glass rounded-2xl px-4 py-3 shadow-luxury"
               >
                 <div className="flex items-center gap-2">
                   <div className="flex">
@@ -286,7 +277,7 @@ export default function HeroSection() {
               <motion.div
                 animate={{ y: [-5, 5, -5] }}
                 transition={{ duration: 3, repeat: Infinity, delay: 1 }}
-                className="absolute bottom-12 -left-4 lg:left-0 glass rounded-2xl px-4 py-3 shadow-luxury"
+                className="absolute bottom-10 -left-2 lg:left-2 glass rounded-2xl px-4 py-3 shadow-luxury"
               >
                 <p className="text-sm font-poppins font-bold text-primary">{slide.badge}</p>
                 <p className="text-xs text-gray-500 font-poppins">This Season</p>
@@ -296,9 +287,8 @@ export default function HeroSection() {
         </div>
       </div>
 
-      {/* Controls */}
-      <div className="absolute bottom-10 left-0 right-0 flex items-center justify-center gap-4 z-10">
-        {/* Prev */}
+      {/* Slide controls */}
+      <div className="absolute bottom-8 left-0 right-0 flex items-center justify-center gap-4 z-10">
         <motion.button
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
@@ -308,7 +298,6 @@ export default function HeroSection() {
           <ChevronLeft className="w-4 h-4" />
         </motion.button>
 
-        {/* Dots */}
         <div className="flex gap-2">
           {slides.map((_, i) => (
             <motion.button
@@ -322,7 +311,6 @@ export default function HeroSection() {
           ))}
         </div>
 
-        {/* Next */}
         <motion.button
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}

@@ -251,10 +251,10 @@ export default function ShopPage() {
           <div className="flex-1">
             <motion.div
               layout
-              className={`grid gap-5 ${
+              className={`grid gap-8 ${
                 isSidebarOpen
-                  ? 'grid-cols-2 lg:grid-cols-3'
-                  : 'grid-cols-2 sm:grid-cols-3 lg:grid-cols-4'
+                  ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'
+                  : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'
               }`}
             >
               <AnimatePresence>

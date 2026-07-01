@@ -17,7 +17,9 @@ export default function CategoriesSection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-14"
         >
-          <span className="text-xs font-poppins font-semibold tracking-widest text-primary uppercase mb-3 block">Shop by Category</span>
+          <span className="text-xs font-poppins font-semibold tracking-widest text-primary uppercase mb-3 block">
+            Shop by Category
+          </span>
           <h2 className="font-playfair text-4xl lg:text-5xl font-bold text-dark mb-4 section-title">
             Explore Our World
           </h2>
@@ -27,7 +29,7 @@ export default function CategoriesSection() {
         </motion.div>
 
         {/* Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6">
           {categories.map((cat, i) => (
             <motion.div
               key={cat.id}
@@ -42,8 +44,8 @@ export default function CategoriesSection() {
                   transition={{ duration: 0.3 }}
                   className="group relative rounded-3xl overflow-hidden cursor-pointer shadow-card hover:shadow-luxury transition-all duration-300"
                 >
-                  {/* Image */}
-                  <div className="aspect-square relative overflow-hidden">
+                  {/* Image — h-48 as specified */}
+                  <div className="relative h-48 overflow-hidden">
                     <img
                       src={cat.image}
                       alt={cat.name}
@@ -51,8 +53,11 @@ export default function CategoriesSection() {
                     />
                     <div
                       className="absolute inset-0 opacity-60 group-hover:opacity-80 transition-opacity duration-300"
-                      style={{ background: `linear-gradient(180deg, transparent 30%, ${cat.color}CC 100%)` }}
+                      style={{
+                        background: `linear-gradient(180deg, transparent 20%, ${cat.color}CC 100%)`,
+                      }}
                     />
+
                     {/* Icon overlay */}
                     <motion.div
                       initial={{ scale: 0.8, opacity: 0.8 }}
@@ -64,18 +69,20 @@ export default function CategoriesSection() {
                   </div>
 
                   {/* Info */}
-                  <div className="absolute bottom-0 left-0 right-0 p-3 text-white">
+                  <div className="absolute bottom-0 left-0 right-0 px-4 py-4 text-white">
                     <p className="font-poppins font-semibold text-sm">{cat.name}</p>
                     <p className="font-poppins text-xs opacity-80">{cat.count} items</p>
                   </div>
 
                   {/* Arrow on hover */}
                   <motion.div
-                    initial={{ opacity: 0, x: -5 }}
-                    whileHover={{ opacity: 1, x: 0 }}
-                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg opacity-0 group-hover:opacity-100 transition-opacity"
+                    initial={{ opacity: 0 }}
+                    whileHover={{ opacity: 1 }}
+                    className="absolute inset-0 flex items-center justify-center"
                   >
-                    <ArrowRight className="w-4 h-4 text-primary" />
+                    <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg opacity-0 group-hover:opacity-100 transition-opacity">
+                      <ArrowRight className="w-4 h-4 text-primary" />
+                    </div>
                   </motion.div>
                 </motion.div>
               </Link>
