@@ -1,136 +1,97 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { Star, Quote, ChevronLeft, ChevronRight } from 'lucide-react'
-import { testimonials } from '@/data/products'
+import { motion } from 'framer-motion'
+import { Star } from 'lucide-react'
+
+const testimonials = [
+  {
+    id: '1',
+    name: 'Fatima Malik',
+    location: 'Karachi',
+    rating: 5,
+    comment: 'Finally found a trusted online beauty store in Pakistan! The Charlotte Tilbury foundation I ordered arrived in perfect condition. 100% authentic, no doubts.',
+    avatar: 'https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=100',
+    date: 'November 2024',
+  },
+  {
+    id: '2',
+    name: 'Ayesha Siddiqui',
+    location: 'Lahore',
+    rating: 5,
+    comment: 'Ordered Huda Beauty palette and Rare Beauty blush. Both arrived next day! The packaging was stunning and products are totally genuine. My go-to store now.',
+    avatar: 'https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=100',
+    date: 'October 2024',
+  },
+  {
+    id: '3',
+    name: 'Zara Khan',
+    location: 'Islamabad',
+    rating: 5,
+    comment: 'Love the variety! Found brands here that I couldn\'t find anywhere else in Pakistan. Easy returns process and fast cash on delivery. Highly recommend!',
+    avatar: 'https://images.pexels.com/photos/1065084/pexels-photo-1065084.jpeg?auto=compress&cs=tinysrgb&w=100',
+    date: 'October 2024',
+  },
+]
 
 export default function TestimonialsSection() {
-  const [current, setCurrent] = useState(0)
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrent((prev) => (prev + 1) % testimonials.length)
-    }, 4000)
-    return () => clearInterval(timer)
-  }, [])
-
   return (
-    <section className="py-24 bg-gradient-to-br from-background via-secondary/20 to-background relative overflow-hidden">
-      {/* Decorative blobs */}
-      <div className="absolute top-10 left-10 w-64 h-64 bg-primary/5 rounded-full blur-3xl" />
-      <div className="absolute bottom-10 right-10 w-64 h-64 bg-gold/5 rounded-full blur-3xl" />
+    <section className="py-16 bg-secondary">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-14"
+          className="mb-10"
         >
-          <span className="text-xs font-poppins font-semibold tracking-widest text-primary uppercase mb-3 block">Testimonials</span>
-          <h2 className="font-playfair text-4xl lg:text-5xl font-bold text-dark mb-4 section-title">
-            Loved by Thousands
+          <span className="text-xs font-poppins font-semibold tracking-widest text-primary uppercase">
+            Reviews
+          </span>
+          <h2 className="font-playfair text-3xl lg:text-4xl font-bold text-dark mt-1 section-title text-left">
+            What Our Customers Say
           </h2>
-          <p className="text-gray-500 font-poppins max-w-xl mx-auto">
-            Real reviews from our beauty community worldwide.
-          </p>
         </motion.div>
 
-        {/* Main featured testimonial */}
-        <div className="max-w-3xl mx-auto mb-12 relative">
-          <AnimatePresence mode="wait">
+        {/* 3-column grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {testimonials.map((t, i) => (
             <motion.div
-              key={current}
-              initial={{ opacity: 0, y: 20, scale: 0.97 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: -20, scale: 0.97 }}
-              transition={{ duration: 0.4 }}
-              className="relative bg-white rounded-3xl p-10 shadow-luxury text-center"
+              key={t.id}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1 }}
+              className="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow"
             >
-              {/* Quote icon */}
-              <div className="absolute -top-5 left-1/2 -translate-x-1/2 w-10 h-10 bg-primary rounded-full flex items-center justify-center shadow-glow-pink">
-                <Quote className="w-4 h-4 text-white fill-white" />
-              </div>
-
               {/* Stars */}
-              <div className="flex justify-center gap-1 mb-6">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-5 h-5 fill-gold text-gold" />
+              <div className="flex gap-0.5 mb-4">
+                {[...Array(t.rating)].map((_, i) => (
+                  <Star key={i} className="w-4 h-4 fill-primary text-primary" />
                 ))}
               </div>
 
               {/* Quote */}
-              <p className="font-playfair text-xl text-dark leading-relaxed mb-8 italic">
-                &ldquo;{testimonials[current].comment}&rdquo;
+              <p className="text-gray-600 font-poppins text-sm leading-relaxed mb-6">
+                &ldquo;{t.comment}&rdquo;
               </p>
 
               {/* Author */}
-              <div className="flex items-center justify-center gap-4">
+              <div className="flex items-center gap-3">
                 <img
-                  src={testimonials[current].avatar}
-                  alt={testimonials[current].user}
-                  className="w-14 h-14 rounded-full object-cover ring-4 ring-secondary"
+                  src={t.avatar}
+                  alt={t.name}
+                  className="w-10 h-10 rounded-full object-cover flex-shrink-0"
                 />
-                <div className="text-left">
-                  <p className="font-poppins font-bold text-dark">{testimonials[current].user}</p>
-                  <p className="text-sm text-gray-400 font-poppins">{testimonials[current].date}</p>
+                <div>
+                  <p className="font-poppins font-semibold text-dark text-sm">{t.name}</p>
+                  <p className="font-poppins text-xs text-gray-400">{t.location} · {t.date}</p>
                 </div>
               </div>
             </motion.div>
-          </AnimatePresence>
-
-          {/* Navigation */}
-          <div className="absolute top-1/2 -translate-y-1/2 -left-6 -right-6 flex justify-between pointer-events-none">
-            <motion.button
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              onClick={() => setCurrent((prev) => (prev - 1 + testimonials.length) % testimonials.length)}
-              className="w-12 h-12 rounded-full bg-white shadow-luxury flex items-center justify-center pointer-events-auto hover:bg-primary hover:text-white transition-all"
-            >
-              <ChevronLeft className="w-4 h-4" />
-            </motion.button>
-            <motion.button
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              onClick={() => setCurrent((prev) => (prev + 1) % testimonials.length)}
-              className="w-12 h-12 rounded-full bg-white shadow-luxury flex items-center justify-center pointer-events-auto hover:bg-primary hover:text-white transition-all"
-            >
-              <ChevronRight className="w-4 h-4" />
-            </motion.button>
-          </div>
-        </div>
-
-        {/* Thumbnails */}
-        <div className="flex justify-center gap-4 flex-wrap">
-          {testimonials.map((t, i) => (
-            <motion.button
-              key={t.id}
-              onClick={() => setCurrent(i)}
-              whileHover={{ scale: 1.1 }}
-              className={`transition-all duration-300 ${i === current ? 'ring-2 ring-primary ring-offset-2 ring-offset-background' : 'opacity-50'}`}
-            >
-              <img
-                src={t.avatar}
-                alt={t.user}
-                className="w-12 h-12 rounded-full object-cover"
-              />
-            </motion.button>
           ))}
         </div>
 
-        {/* Dots */}
-        <div className="flex justify-center gap-2 mt-6">
-          {testimonials.map((_, i) => (
-            <motion.button
-              key={i}
-              onClick={() => setCurrent(i)}
-              animate={{ width: i === current ? 24 : 8 }}
-              className={`h-2 rounded-full transition-colors ${i === current ? 'bg-primary' : 'bg-primary/30'}`}
-            />
-          ))}
-        </div>
       </div>
     </section>
   )

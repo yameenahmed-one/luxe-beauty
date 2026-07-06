@@ -2,93 +2,71 @@
 
 import { motion } from 'framer-motion'
 import Link from 'next/link'
-import { categories } from '@/data/products'
-import { ArrowRight } from 'lucide-react'
+
+const categoryItems = [
+  { name: 'Lipsticks',   image: 'https://images.pexels.com/photos/2533266/pexels-photo-2533266.jpeg?auto=compress&cs=tinysrgb&w=300', slug: 'Lipstick' },
+  { name: 'Foundation',  image: 'https://images.pexels.com/photos/5069614/pexels-photo-5069614.jpeg?auto=compress&cs=tinysrgb&w=300', slug: 'Foundation' },
+  { name: 'Eyeshadow',   image: 'https://images.pexels.com/photos/2697787/pexels-photo-2697787.jpeg?auto=compress&cs=tinysrgb&w=300', slug: 'Eyeshadow' },
+  { name: 'Concealer',   image: 'https://images.pexels.com/photos/5069432/pexels-photo-5069432.jpeg?auto=compress&cs=tinysrgb&w=300', slug: 'Concealer' },
+  { name: 'Mascara',     image: 'https://images.pexels.com/photos/2533268/pexels-photo-2533268.jpeg?auto=compress&cs=tinysrgb&w=300', slug: 'Mascara' },
+  { name: 'Skincare',    image: 'https://images.pexels.com/photos/3685530/pexels-photo-3685530.jpeg?auto=compress&cs=tinysrgb&w=300', slug: 'Skincare' },
+  { name: 'Perfumes',    image: 'https://images.pexels.com/photos/1591161/pexels-photo-1591161.jpeg?auto=compress&cs=tinysrgb&w=300', slug: 'Perfume' },
+  { name: 'Brushes',     image: 'https://images.pexels.com/photos/2522671/pexels-photo-2522671.jpeg?auto=compress&cs=tinysrgb&w=300', slug: 'Brushes' },
+]
 
 export default function CategoriesSection() {
   return (
-    <section className="py-24 bg-white">
+    <section className="py-16 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-14"
+          className="mb-10"
         >
-          <span className="text-xs font-poppins font-semibold tracking-widest text-primary uppercase mb-3 block">
-            Shop by Category
+          <span className="text-xs font-poppins font-semibold tracking-widest text-primary uppercase">
+            Browse
           </span>
-          <h2 className="font-playfair text-4xl lg:text-5xl font-bold text-dark mb-4 section-title">
-            Explore Our World
+          <h2 className="font-playfair text-3xl lg:text-4xl font-bold text-dark mt-1 section-title text-left">
+            Shop by Category
           </h2>
-          <p className="text-gray-500 font-poppins max-w-xl mx-auto">
-            From bold lips to flawless skin — discover every dimension of luxury beauty.
-          </p>
         </motion.div>
 
-        {/* Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6">
-          {categories.map((cat, i) => (
+        {/* Category Grid */}
+        <div className="grid grid-cols-4 sm:grid-cols-6 lg:grid-cols-8 gap-4">
+          {categoryItems.map((cat, i) => (
             <motion.div
-              key={cat.id}
-              initial={{ opacity: 0, y: 30 }}
+              key={cat.name}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.07, duration: 0.5 }}
+              transition={{ delay: i * 0.06 }}
             >
-              <Link href={`/shop?category=${encodeURIComponent(cat.name)}`}>
+              <Link href={`/shop?category=${encodeURIComponent(cat.slug)}`}>
                 <motion.div
-                  whileHover={{ y: -8, scale: 1.03 }}
-                  transition={{ duration: 0.3 }}
-                  className="group relative rounded-3xl overflow-hidden cursor-pointer shadow-card hover:shadow-luxury transition-all duration-300"
+                  whileHover={{ y: -4 }}
+                  className="group flex flex-col items-center gap-2 cursor-pointer"
                 >
-                  {/* Image — h-48 as specified */}
-                  <div className="relative h-48 overflow-hidden">
+                  {/* Image box */}
+                  <div className="w-full aspect-square overflow-hidden rounded-xl border border-gray-100 group-hover:border-primary transition-colors duration-300 bg-secondary">
                     <img
                       src={cat.image}
                       alt={cat.name}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                      className="w-full h-full object-cover transition-transform duration-400 group-hover:scale-105"
                     />
-                    <div
-                      className="absolute inset-0 opacity-60 group-hover:opacity-80 transition-opacity duration-300"
-                      style={{
-                        background: `linear-gradient(180deg, transparent 20%, ${cat.color}CC 100%)`,
-                      }}
-                    />
-
-                    {/* Icon overlay */}
-                    <motion.div
-                      initial={{ scale: 0.8, opacity: 0.8 }}
-                      whileHover={{ scale: 1.2, opacity: 1 }}
-                      className="absolute top-3 right-3 w-9 h-9 bg-white/90 rounded-full flex items-center justify-center shadow-sm text-lg"
-                    >
-                      {cat.icon}
-                    </motion.div>
                   </div>
-
-                  {/* Info */}
-                  <div className="absolute bottom-0 left-0 right-0 px-4 py-4 text-white">
-                    <p className="font-poppins font-semibold text-sm">{cat.name}</p>
-                    <p className="font-poppins text-xs opacity-80">{cat.count} items</p>
-                  </div>
-
-                  {/* Arrow on hover */}
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    whileHover={{ opacity: 1 }}
-                    className="absolute inset-0 flex items-center justify-center"
-                  >
-                    <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg opacity-0 group-hover:opacity-100 transition-opacity">
-                      <ArrowRight className="w-4 h-4 text-primary" />
-                    </div>
-                  </motion.div>
+                  {/* Label */}
+                  <span className="text-xs font-poppins font-medium text-dark group-hover:text-primary transition-colors text-center leading-tight">
+                    {cat.name}
+                  </span>
                 </motion.div>
               </Link>
             </motion.div>
           ))}
         </div>
+
       </div>
     </section>
   )

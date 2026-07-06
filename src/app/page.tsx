@@ -1,4 +1,5 @@
 import HeroSection from '@/components/home/HeroSection'
+import TrustBar from '@/components/home/TrustBar'
 import CategoriesSection from '@/components/home/CategoriesSection'
 import FeaturedProducts from '@/components/home/FeaturedProducts'
 import TrendingCollection from '@/components/home/TrendingCollection'
@@ -13,6 +14,7 @@ export default function Home() {
   return (
     <>
       <HeroSection />
+      <TrustBar />
       <CategoriesSection />
       <FeaturedProducts />
       <TrendingCollection />

@@ -2,112 +2,110 @@
 
 import Link from 'next/link'
 import { motion } from 'framer-motion'
-import { Sparkles, MapPin, Phone, Mail, CreditCard, Truck, Shield, RefreshCw } from 'lucide-react'
+import { MapPin, Phone, Mail } from 'lucide-react'
+
+const links = {
+  Shop: [
+    { label: 'New Arrivals', href: '/shop?sort=newest' },
+    { label: 'Best Sellers', href: '/shop?sort=popular' },
+    { label: 'Sale',         href: '/shop?sale=true' },
+    { label: 'All Products', href: '/shop' },
+    { label: 'Gift Cards',   href: '/shop' },
+  ],
+  Help: [
+    { label: 'Contact Us',   href: '/contact' },
+    { label: 'FAQs',         href: '/faq' },
+    { label: 'Track Order',  href: '/track-order' },
+    { label: 'Returns',      href: '/refund-policy' },
+    { label: 'Shipping Info',href: '/faq' },
+  ],
+  Company: [
+    { label: 'About Us',    href: '/about' },
+    { label: 'Our Story',   href: '/about' },
+    { label: 'Blog',        href: '/blog' },
+    { label: 'Careers',     href: '/about' },
+    { label: 'Press',       href: '/about' },
+  ],
+  Legal: [
+    { label: 'Privacy Policy',   href: '/privacy-policy' },
+    { label: 'Terms of Service', href: '/terms' },
+    { label: 'Refund Policy',    href: '/refund-policy' },
+    { label: 'Cookie Policy',    href: '/privacy-policy' },
+  ],
+}
+
+const socials = [
+  { label: 'Instagram', href: '#', abbr: 'IG' },
+  { label: 'Facebook',  href: '#', abbr: 'FB' },
+  { label: 'YouTube',   href: '#', abbr: 'YT' },
+  { label: 'TikTok',    href: '#', abbr: 'TK' },
+]
 
 export default function Footer() {
-  const links = {
-    Company: ['About Us', 'Careers', 'Press', 'Our Story', 'Sustainability'],
-    Shop: ['New Arrivals', 'Best Sellers', 'Sale', 'Gift Cards', 'Luxury Kits'],
-    Support: ['Contact Us', 'FAQs', 'Shipping Info', 'Returns', 'Track Order'],
-    Legal: ['Privacy Policy', 'Terms of Service', 'Cookie Policy', 'Refund Policy'],
-  }
-
-  const socials = [
-    { emoji: '📸', href: '#', label: 'Instagram' },
-    { emoji: '👍', href: '#', label: 'Facebook' },
-    { emoji: '🐦', href: '#', label: 'Twitter' },
-    { emoji: '▶️', href: '#', label: 'YouTube' },
-    { emoji: '📌', href: '#', label: 'Pinterest' },
-  ]
-
-  const features = [
-    { icon: Truck, title: 'Free Delivery', desc: 'On orders over Rs. 2,000' },
-    { icon: Shield, title: 'Authentic Products', desc: '100% genuine guaranteed' },
-    { icon: RefreshCw, title: 'Easy Returns', desc: '7-day return policy' },
-    { icon: CreditCard, title: 'Secure Payment', desc: 'SSL encrypted checkout' },
-  ]
-
   return (
-    <footer className="bg-dark text-white">
-      {/* Features bar */}
-      <div className="border-b border-white/10">
-        <div className="max-w-7xl mx-auto px-4 py-12 grid grid-cols-2 md:grid-cols-4 gap-8">
-          {features.map((f, i) => (
-            <motion.div
-              key={f.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.1 }}
-              viewport={{ once: true }}
-              className="flex items-center gap-4"
-            >
-              <div className="p-3 rounded-xl bg-white/10 flex-shrink-0">
-                <f.icon className="w-5 h-5 text-gold" />
-              </div>
-              <div>
-                <p className="font-poppins font-semibold text-sm">{f.title}</p>
-                <p className="text-gray-400 text-xs mt-0.5">{f.desc}</p>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </div>
+    <footer className="bg-[#111111] text-white">
 
-      {/* Main footer */}
-      <div className="max-w-7xl mx-auto px-4 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-12">
-          {/* Brand */}
+      {/* Main footer content */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-10">
+
+          {/* Brand column */}
           <div className="lg:col-span-2">
-            <div className="flex items-center gap-2 mb-4">
-              <Sparkles className="w-6 h-6 text-primary" />
-              <span className="font-playfair text-2xl font-bold gradient-text">LUXE BEAUTY</span>
+            <div className="mb-4">
+              <span className="font-playfair text-2xl font-bold text-white tracking-wide">
+                LUXE <span className="text-primary">BEAUTY</span>
+              </span>
             </div>
-            <p className="text-gray-400 text-sm leading-relaxed mb-6 font-poppins">
-              Your destination for world-class luxury beauty. We curate the finest cosmetics from the globe&apos;s most coveted brands.
+            <p className="text-gray-400 text-sm leading-relaxed mb-6 font-poppins max-w-xs">
+              Pakistan&apos;s #1 destination for 100% authentic luxury beauty. Shop 500+ brands with nationwide delivery.
             </p>
+
             {/* Social */}
-            <div className="flex gap-3">
-              {socials.map((social) => (
+            <div className="flex gap-2 mb-8">
+              {socials.map(({ href, label, abbr }) => (
                 <motion.a
-                  key={social.label}
-                  href={social.href}
-                  whileHover={{ scale: 1.15, y: -2 }}
-                  className="p-2.5 rounded-xl bg-white/10 hover:bg-primary transition-all duration-300 text-lg flex items-center justify-center w-10 h-10"
-                  aria-label={social.label}
+                  key={label}
+                  href={href}
+                  aria-label={label}
+                  whileHover={{ scale: 1.1, y: -2 }}
+                  className="w-9 h-9 rounded-lg bg-white/10 hover:bg-primary flex items-center justify-center transition-colors text-[10px] font-bold text-white"
                 >
-                  {social.emoji}
+                  {abbr}
                 </motion.a>
               ))}
             </div>
+
             {/* Contact */}
-            <div className="mt-8 space-y-2">
-              <div className="flex items-center gap-2 text-sm text-gray-400">
+            <div className="space-y-2.5">
+              <div className="flex items-center gap-2.5 text-sm text-gray-400">
                 <MapPin className="w-4 h-4 text-primary flex-shrink-0" />
                 <span>Shop #12, Zainab Market, Karachi, Pakistan</span>
               </div>
-              <div className="flex items-center gap-2 text-sm text-gray-400">
+              <div className="flex items-center gap-2.5 text-sm text-gray-400">
                 <Phone className="w-4 h-4 text-primary flex-shrink-0" />
                 <span>+92 300 1234567</span>
               </div>
-              <div className="flex items-center gap-2 text-sm text-gray-400">
+              <div className="flex items-center gap-2.5 text-sm text-gray-400">
                 <Mail className="w-4 h-4 text-primary flex-shrink-0" />
                 <span>hello@luxebeauty.pk</span>
               </div>
             </div>
           </div>
 
-          {/* Links */}
+          {/* Links columns */}
           {Object.entries(links).map(([title, items]) => (
             <div key={title}>
-              <h3 className="font-playfair text-lg font-semibold mb-5 text-white">{title}</h3>
+              <h3 className="font-poppins font-semibold text-sm text-white mb-5 uppercase tracking-wider">
+                {title}
+              </h3>
               <ul className="space-y-3">
                 {items.map((item) => (
-                  <li key={item}>
+                  <li key={item.label}>
                     <Link
-                      href={`/${item.toLowerCase().replace(/\s+/g, '-')}`}
-                      className="text-sm text-gray-400 hover:text-primary transition-colors font-poppins hover:translate-x-1 inline-block transition-transform"
+                      href={item.href}
+                      className="text-sm text-gray-400 hover:text-primary transition-colors font-poppins"
                     >
-                      {item}
+                      {item.label}
                     </Link>
                   </li>
                 ))}
@@ -115,39 +113,20 @@ export default function Footer() {
             </div>
           ))}
         </div>
+      </div>
 
-        {/* Newsletter */}
-        <div className="mt-16 p-8 rounded-3xl bg-gradient-to-r from-primary/20 to-gold/20 border border-white/10">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            <div>
-              <h3 className="font-playfair text-2xl font-bold mb-2">Get Beauty Secrets & Offers</h3>
-              <p className="text-gray-400 text-sm font-poppins">Join 500K+ beauty lovers. Unsubscribe anytime.</p>
-            </div>
-            <div className="flex w-full md:w-auto gap-2">
-              <input
-                type="email"
-                placeholder="Your email address"
-                className="flex-1 md:w-72 px-5 py-3 rounded-full bg-white/10 border border-white/20 text-white placeholder:text-gray-400 text-sm font-poppins focus:outline-none focus:border-primary"
-              />
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="btn-luxury ripple text-sm px-6 py-3 whitespace-nowrap"
-              >
-                Subscribe
-              </motion.button>
-            </div>
-          </div>
-        </div>
-
-        {/* Bottom */}
-        <div className="mt-12 pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-gray-400 text-sm font-poppins">
-            © 2024 Luxe Beauty Pakistan. All rights reserved. Made with ❤️ for beauty lovers.
+      {/* Bottom bar */}
+      <div className="border-t border-white/10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p className="text-gray-500 text-xs font-poppins">
+            © 2024 Luxe Beauty Pakistan. All rights reserved.
           </p>
-          <div className="flex items-center gap-3">
-            {['visa', 'mastercard', 'easypaisa', 'jazzcash', 'cod'].map((pay) => (
-              <div key={pay} className="px-3 py-1.5 bg-white/10 rounded-lg text-xs text-gray-400 uppercase font-bold tracking-wider">
+          <div className="flex items-center gap-2 flex-wrap justify-center">
+            {['VISA', 'MASTERCARD', 'EASYPAISA', 'JAZZCASH', 'COD'].map((pay) => (
+              <div
+                key={pay}
+                className="px-2.5 py-1 bg-white/10 rounded text-[10px] text-gray-400 font-bold tracking-wider"
+              >
                 {pay}
               </div>
             ))}

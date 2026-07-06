@@ -6,42 +6,28 @@
 
 /* ─── CSS Variables ─────────────────────────────── */
 :root {
-  --primary: #D4AF37;
-  --secondary: #DCA8A6;
-  --background: #FFF5F5;
-  --dark: #2D2424;
-  --gold: #D4AF37;
+  --primary: #C8A951;
+  --secondary: #F5F0E8;
+  --background: #FFFFFF;
+  --dark: #111111;
+  --gold: #C8A951;
 }
 
 /* ─── Base ─────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
-body { background-color: #FFF5F5; font-family: 'Poppins', sans-serif; color: #2D2424; overflow-x: hidden; }
+body { background-color: #FFFFFF; font-family: 'Poppins', sans-serif; color: #111111; overflow-x: hidden; }
 
 /* ─── Scrollbar ─────────────────────────────────── */
 ::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: #FFF5F5; }
-::-webkit-scrollbar-thumb { background: linear-gradient(#DCA8A6, #D4AF37); border-radius: 10px; }
+::-webkit-scrollbar-track { background: #FFFFFF; }
+::-webkit-scrollbar-thumb { background: #C8A951; border-radius: 10px; }
 
 /* ─── Components ─────────────────────────────────── */
 @layer components {
 
-  .glass {
-    background: rgba(255, 255, 255, 0.30);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.25);
-  }
-
-  .glass-dark {
-    background: rgba(45, 36, 36, 0.6);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-  }
-
   .gradient-text {
-    background: linear-gradient(135deg, #D4AF37 0%, #F0CC5A 50%, #D4AF37 100%);
+    background: linear-gradient(135deg, #C8A951 0%, #E0C060 50%, #C8A951 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -52,32 +38,31 @@ body { background-color: #FFF5F5; font-family: 'Poppins', sans-serif; color: #2D
   .btn-luxury {
     position: relative;
     overflow: hidden;
-    background: linear-gradient(135deg, #D4AF37, #B8961E);
+    background: #C8A951;
     color: #fff;
     border: none;
-    padding: 14px 36px;
-    border-radius: 50px;
+    padding: 14px 32px;
+    border-radius: 8px;
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
     font-size: 14px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
+    letter-spacing: 0.5px;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 8px 25px rgba(212, 175, 55, 0.35);
+    box-shadow: 0 4px 15px rgba(200, 169, 81, 0.3);
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
     text-decoration: none;
   }
-  .btn-luxury:hover { transform: translateY(-2px); box-shadow: 0 15px 35px rgba(212, 175, 55, 0.5); }
+  .btn-luxury:hover { background: #B8961E; transform: translateY(-1px); box-shadow: 0 8px 20px rgba(200, 169, 81, 0.4); }
   .btn-luxury::before {
     content: '';
     position: absolute;
     top: 0; left: -100%;
     width: 100%; height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
     transition: left 0.5s;
   }
   .btn-luxury:hover::before { left: 100%; }
@@ -99,14 +84,11 @@ body { background-color: #FFF5F5; font-family: 'Poppins', sans-serif; color: #2D
   }
   .ripple:active::after { transform: scale(0, 0); opacity: 0.3; transition: 0s; }
 
-  .product-card { transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); }
-  .product-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 25px 50px rgba(220, 168, 166, 0.25), 0 10px 30px rgba(0, 0, 0, 0.08);
-  }
+  .product-card { transition: all 0.3s ease; }
+  .product-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
 
   .skeleton {
-    background: linear-gradient(90deg, #f5e8e8 25%, #ead8d8 50%, #f5e8e8 75%);
+    background: linear-gradient(90deg, #f5f5f5 25%, #eeeeee 50%, #f5f5f5 75%);
     background-size: 200% 100%;
     animation: shimmer 1.5s infinite;
   }
@@ -114,9 +96,9 @@ body { background-color: #FFF5F5; font-family: 'Poppins', sans-serif; color: #2D
   .section-title::after {
     content: '';
     display: block;
-    width: 60px; height: 3px;
-    background: linear-gradient(135deg, #DCA8A6, #D4AF37);
-    margin: 16px auto 0;
+    width: 48px; height: 2px;
+    background: #C8A951;
+    margin: 12px auto 0;
     border-radius: 2px;
   }
 
@@ -125,7 +107,7 @@ body { background-color: #FFF5F5; font-family: 'Poppins', sans-serif; color: #2D
 
   .cursor-dot {
     width: 8px; height: 8px;
-    background-color: #D4AF37;
+    background-color: #C8A951;
     border-radius: 50%;
     position: fixed;
     pointer-events: none;
@@ -134,7 +116,7 @@ body { background-color: #FFF5F5; font-family: 'Poppins', sans-serif; color: #2D
   }
   .cursor-ring {
     width: 36px; height: 36px;
-    border: 2px solid rgba(212, 175, 55, 0.5);
+    border: 2px solid rgba(200, 169, 81, 0.5);
     border-radius: 50%;
     position: fixed;
     pointer-events: none;
@@ -144,7 +126,19 @@ body { background-color: #FFF5F5; font-family: 'Poppins', sans-serif; color: #2D
   }
 
   .animate-scroll {
-    animation: scroll 20s linear infinite;
+    animation: scroll 25s linear infinite;
+    display: flex;
+    white-space: nowrap;
+  }
+
+  .animate-marquee {
+    animation: marquee 30s linear infinite;
+    display: flex;
+    white-space: nowrap;
+  }
+
+  .animate-marquee-slow {
+    animation: marquee 40s linear infinite;
     display: flex;
     white-space: nowrap;
   }
@@ -162,11 +156,7 @@ body { background-color: #FFF5F5; font-family: 'Poppins', sans-serif; color: #2D
 }
 @keyframes float {
   0%, 100% { transform: translateY(0px); }
-  50%      { transform: translateY(-20px); }
-}
-@keyframes glow {
-  from { box-shadow: 0 0 10px #D4AF37, 0 0 20px #D4AF37; }
-  to   { box-shadow: 0 0 20px #D4AF37, 0 0 40px #D4AF37; }
+  50%      { transform: translateY(-12px); }
 }
 @keyframes slideUp {
   from { transform: translateY(30px); opacity: 0; }
@@ -178,11 +168,7 @@ body { background-color: #FFF5F5; font-family: 'Poppins', sans-serif; color: #2D
 }
 @keyframes marquee {
   0%   { transform: translateX(0%); }
-  100% { transform: translateX(-100%); }
-}
-@keyframes marquee2 {
-  0%   { transform: translateX(100%); }
-  100% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
 }
 @keyframes scroll {
   from { transform: translateX(0); }
@@ -190,5 +176,5 @@ body { background-color: #FFF5F5; font-family: 'Poppins', sans-serif; color: #2D
 }
 
 /* ─── Swiper overrides ──────────────────────────── */
-.swiper-pagination-bullet { background: #D4AF37 !important; }
+.swiper-pagination-bullet { background: #C8A951 !important; }
 .swiper-pagination-bullet-active { width: 24px !important; border-radius: 4px !important; }

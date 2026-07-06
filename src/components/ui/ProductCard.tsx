@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
-import { Heart, ShoppingBag, Star, Eye, GitCompare, Zap } from 'lucide-react'
+import { Heart, ShoppingBag, Star } from 'lucide-react'
 import { useDispatch, useSelector } from 'react-redux'
 import { addToCart } from '@/store/cartSlice'
 import { toggleWishlist, selectWishlistItems } from '@/store/wishlistSlice'
@@ -16,26 +16,22 @@ interface ProductCardProps {
 }
 
 export default function ProductCard({ product, index = 0 }: ProductCardProps) {
-  const [isHovered, setIsHovered] = useState(false)
-  const [selectedShade, setSelectedShade] = useState<string | null>(null)
+  const [isHovered, setIsHovered]   = useState(false)
   const [addedToCart, setAddedToCart] = useState(false)
-  const [imgError, setImgError] = useState(false)
-  const dispatch = useDispatch()
+  const [imgError, setImgError]     = useState(false)
+
+  const dispatch      = useDispatch()
   const wishlistItems = useSelector(selectWishlistItems)
-  const isWishlisted = wishlistItems.some((item) => item.id === product.id)
+  const isWishlisted  = wishlistItems.some((item) => item.id === product.id)
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault()
     e.stopPropagation()
-    dispatch(addToCart({ product, quantity: 1, shade: selectedShade || undefined }))
+    dispatch(addToCart({ product, quantity: 1 }))
     setAddedToCart(true)
     toast.success(`${product.name} added to cart!`, {
-      style: {
-        background: '#2D2424',
-        color: '#fff',
-        borderRadius: '12px',
-      },
-      iconTheme: { primary: '#D4AF37', secondary: '#fff' },
+      style: { background: '#111111', color: '#fff', borderRadius: '8px' },
+      iconTheme: { primary: '#C8A951', secondary: '#fff' },
     })
     setTimeout(() => setAddedToCart(false), 2000)
   }
@@ -45,15 +41,15 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
     e.stopPropagation()
     dispatch(toggleWishlist(product))
     toast(isWishlisted ? 'Removed from wishlist' : '❤️ Added to wishlist!', {
-      style: { background: '#2D2424', color: '#fff', borderRadius: '12px' },
+      style: { background: '#111111', color: '#fff', borderRadius: '8px' },
     })
   }
 
-  const badgeConfig = {
-    new: { text: 'NEW', className: 'bg-primary text-white' },
-    sale: { text: `${product.discount}% OFF`, className: 'bg-red-500 text-white' },
-    bestseller: { text: 'BESTSELLER', className: 'bg-gold text-dark' },
-    limited: { text: 'LIMITED', className: 'bg-dark text-white' },
+  const badgeConfig: Record<string, { text: string; className: string }> = {
+    new:        { text: 'NEW',                          className: 'bg-dark text-white' },
+    sale:       { text: `${product.discount ?? 0}% OFF`, className: 'bg-red-500 text-white' },
+    bestseller: { text: 'BESTSELLER',                   className: 'bg-primary text-white' },
+    limited:    { text: 'LIMITED',                      className: 'bg-dark text-white' },
   }
 
   return (
@@ -61,223 +57,115 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ delay: index * 0.08, duration: 0.5 }}
+      transition={{ delay: index * 0.06, duration: 0.4 }}
       className="group"
     >
       <Link href={`/product/${product.id}`}>
         <div
-          className="product-card bg-white rounded-2xl overflow-hidden shadow-card hover:shadow-lg border border-secondary/20 cursor-pointer transition-all duration-300"
+          className={`product-card bg-white rounded-xl overflow-hidden border transition-all duration-300 cursor-pointer ${
+            isHovered ? 'border-primary shadow-md' : 'border-gray-100 shadow-sm'
+          }`}
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
         >
-          {/* Image Container */}
-          <div className="relative aspect-[4/5] overflow-hidden bg-[#FFF5F5]">
-            {/* Regular img tag — no next/image to avoid 404 issues */}
+          {/* Image */}
+          <div className="relative aspect-square overflow-hidden bg-gray-50">
             <img
-              src={imgError ? 'https://images.unsplash.com/photo-1586495777744-4e6232bf2c93?w=500&q=80' : product.image}
+              src={imgError
+                ? 'https://images.unsplash.com/photo-1586495777744-4e6232bf2c93?w=500&q=80'
+                : product.image}
               alt={product.name}
               onError={() => setImgError(true)}
-              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-              style={{ display: 'block' }}
+              className={`w-full h-full object-cover transition-transform duration-400 ${
+                isHovered ? 'scale-[1.04]' : 'scale-100'
+              }`}
             />
 
-            {/* Glassmorphism hover overlay */}
-            <motion.div
-              animate={{ opacity: isHovered ? 1 : 0 }}
-              transition={{ duration: 0.3 }}
-              className="absolute inset-0 pointer-events-none"
-              style={{
-                background: 'linear-gradient(to top, rgba(45,36,36,0.45) 0%, rgba(45,36,36,0.1) 40%, transparent 70%)',
-              }}
-            />
-
-            {/* Badge */}
+            {/* Badge top-left */}
             {product.badge && (
-              <motion.div
-                initial={{ x: -20, opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                className={`absolute top-3 left-3 px-2.5 py-1 rounded-full text-xs font-poppins font-bold tracking-wider ${badgeConfig[product.badge].className}`}
-              >
+              <div className={`absolute top-2.5 left-2.5 px-2 py-0.5 rounded text-[10px] font-poppins font-bold tracking-wider ${badgeConfig[product.badge].className}`}>
                 {badgeConfig[product.badge].text}
-              </motion.div>
+              </div>
             )}
 
-            {/* Action buttons — top right */}
-            <AnimatePresence>
-              {isHovered && (
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 10 }}
-                  className="absolute top-3 right-3 flex flex-col gap-2"
-                >
-                  {/* Wishlist */}
-                  <motion.button
-                    whileHover={{ scale: 1.15 }}
-                    whileTap={{ scale: 0.9 }}
-                    onClick={handleWishlist}
-                    className={`w-9 h-9 rounded-full flex items-center justify-center shadow-lg transition-all ${
-                      isWishlisted
-                        ? 'bg-primary text-white'
-                        : 'bg-white/90 backdrop-blur-sm text-dark hover:bg-primary hover:text-white'
-                    }`}
-                  >
-                    <motion.div
-                      animate={isWishlisted ? { scale: [1, 1.4, 1] } : {}}
-                      transition={{ duration: 0.3 }}
-                    >
-                      <Heart className={`w-4 h-4 ${isWishlisted ? 'fill-current' : ''}`} />
-                    </motion.div>
-                  </motion.button>
+            {/* Wishlist top-right — always visible */}
+            <button
+              onClick={handleWishlist}
+              className={`absolute top-2.5 right-2.5 w-8 h-8 rounded-full flex items-center justify-center shadow transition-all ${
+                isWishlisted
+                  ? 'bg-primary text-white'
+                  : 'bg-white text-gray-400 hover:text-primary hover:bg-white'
+              }`}
+            >
+              <Heart className={`w-3.5 h-3.5 ${isWishlisted ? 'fill-current' : ''}`} />
+            </button>
 
-                  {/* Quick view */}
-                  <motion.button
-                    whileHover={{ scale: 1.15 }}
-                    whileTap={{ scale: 0.9 }}
-                    className="w-9 h-9 rounded-full bg-white/90 backdrop-blur-sm text-dark hover:bg-primary hover:text-white flex items-center justify-center shadow-lg transition-all"
-                  >
-                    <Eye className="w-4 h-4" />
-                  </motion.button>
-
-                  {/* Compare */}
-                  <motion.button
-                    whileHover={{ scale: 1.15 }}
-                    whileTap={{ scale: 0.9 }}
-                    className="w-9 h-9 rounded-full bg-white/90 backdrop-blur-sm text-dark hover:bg-primary hover:text-white flex items-center justify-center shadow-lg transition-all"
-                  >
-                    <GitCompare className="w-4 h-4" />
-                  </motion.button>
-                </motion.div>
-              )}
-            </AnimatePresence>
-
-            {/* Quick Add — bottom on hover */}
+            {/* Add to cart — slides up on hover */}
             <AnimatePresence>
               {isHovered && (
                 <motion.button
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 12 }}
                   animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 20 }}
+                  exit={{ opacity: 0, y: 12 }}
+                  transition={{ duration: 0.2 }}
                   onClick={handleAddToCart}
-                  className="absolute bottom-4 left-4 right-4 py-2.5 bg-dark/90 backdrop-blur-sm text-white text-xs font-poppins font-semibold tracking-wider rounded-xl flex items-center justify-center gap-2 hover:bg-primary transition-colors"
+                  className={`absolute bottom-0 left-0 right-0 py-2.5 text-white text-xs font-poppins font-semibold tracking-wide flex items-center justify-center gap-1.5 transition-colors ${
+                    addedToCart ? 'bg-green-500' : 'bg-primary hover:bg-[#B8961E]'
+                  }`}
                 >
-                  <Zap className="w-3.5 h-3.5" />
-                  Quick Add
+                  <ShoppingBag className="w-3.5 h-3.5" />
+                  {addedToCart ? 'Added!' : 'Add to Cart'}
                 </motion.button>
               )}
             </AnimatePresence>
           </div>
 
-          {/* Card Content */}
-          <div className="p-5 flex flex-col gap-3">
+          {/* Card info */}
+          <div className="p-3.5">
             {/* Brand */}
-            <p className="text-xs font-poppins font-semibold text-primary tracking-wider uppercase">
+            <p className="text-[11px] font-poppins text-gray-400 uppercase tracking-wider mb-1">
               {product.brand}
             </p>
 
             {/* Name */}
-            <h3 className="font-poppins font-semibold text-sm text-dark leading-snug line-clamp-2 group-hover:text-primary transition-colors">
+            <h3 className="font-poppins font-medium text-sm text-dark leading-snug line-clamp-2 mb-2">
               {product.name}
             </h3>
 
             {/* Rating */}
-            <div className="flex items-center gap-1.5">
+            <div className="flex items-center gap-1 mb-2.5">
               <div className="flex">
                 {[...Array(5)].map((_, i) => (
                   <Star
                     key={i}
-                    className={`w-3.5 h-3.5 ${
+                    className={`w-3 h-3 ${
                       i < Math.floor(product.rating)
-                        ? 'fill-gold text-gold'
+                        ? 'fill-primary text-primary'
                         : 'fill-gray-200 text-gray-200'
                     }`}
                   />
                 ))}
               </div>
-              <span className="text-xs text-gray-400 font-poppins">
+              <span className="text-[10px] text-gray-400 font-poppins">
                 ({product.reviews.toLocaleString()})
               </span>
             </div>
 
-            {/* Shades */}
-            {product.shades && product.shades.length > 0 && (
-              <div className="flex items-center gap-1.5">
-                {product.shades.slice(0, 5).map((shade, i) => (
-                  <motion.button
-                    key={i}
-                    whileHover={{ scale: 1.3 }}
-                    whileTap={{ scale: 0.9 }}
-                    onClick={(e) => {
-                      e.preventDefault()
-                      e.stopPropagation()
-                      setSelectedShade(shade)
-                    }}
-                    className={`w-4 h-4 rounded-full border-2 transition-all ${
-                      selectedShade === shade
-                        ? 'border-primary shadow-glow-gold scale-125'
-                        : 'border-white shadow-sm'
-                    }`}
-                    style={{ background: shade }}
-                  />
-                ))}
-                {product.shades.length > 5 && (
-                  <span className="text-xs text-gray-400 font-poppins">
-                    +{product.shades.length - 5}
-                  </span>
-                )}
-              </div>
-            )}
-
-            {/* Price + Cart */}
-            <div className="flex items-center justify-between">
-              <div>
-                <span className="font-playfair font-bold text-lg text-dark">
-                  Rs.{product.price.toLocaleString()}
+            {/* Price */}
+            <div className="flex items-baseline gap-2">
+              <span className="font-poppins font-bold text-base text-dark">
+                Rs.{product.price.toLocaleString()}
+              </span>
+              {product.originalPrice && product.originalPrice > product.price && (
+                <span className="text-xs text-gray-400 line-through font-poppins">
+                  Rs.{product.originalPrice.toLocaleString()}
                 </span>
-                {product.originalPrice && product.originalPrice > product.price && (
-                  <span className="text-xs text-gray-400 line-through ml-2 font-poppins">
-                    Rs.{product.originalPrice.toLocaleString()}
-                  </span>
-                )}
-              </div>
-
-              <motion.button
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-                onClick={handleAddToCart}
-                className={`p-2.5 rounded-full transition-all shadow-sm ${
-                  addedToCart
-                    ? 'bg-green-500 text-white'
-                    : 'bg-primary text-white hover:shadow-glow-gold'
-                }`}
-              >
-                <AnimatePresence mode="wait">
-                  {addedToCart ? (
-                    <motion.div
-                      key="check"
-                      initial={{ scale: 0 }}
-                      animate={{ scale: 1 }}
-                      exit={{ scale: 0 }}
-                    >
-                      <Zap className="w-4 h-4" />
-                    </motion.div>
-                  ) : (
-                    <motion.div
-                      key="bag"
-                      initial={{ scale: 0 }}
-                      animate={{ scale: 1 }}
-                      exit={{ scale: 0 }}
-                    >
-                      <ShoppingBag className="w-4 h-4" />
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </motion.button>
+              )}
             </div>
 
-            {/* Stock */}
+            {/* Out of stock */}
             {!product.inStock && (
-              <p className="text-xs text-red-400 font-poppins">Out of stock</p>
+              <p className="text-[10px] text-red-400 font-poppins mt-1">Out of stock</p>
             )}
           </div>
         </div>

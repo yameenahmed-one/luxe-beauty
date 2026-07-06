@@ -4,67 +4,61 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import ProductCard from '@/components/ui/ProductCard'
 import { products } from '@/data/products'
-import { Sparkles } from 'lucide-react'
+import Link from 'next/link'
 
-const tabs = ['All', 'Lips', 'Eyes', 'Face', 'Skincare']
+const tabs = ['All', 'Lips', 'Eyes', 'Face', 'Skincare', 'Fragrance']
 
 export default function FeaturedProducts() {
   const [activeTab, setActiveTab] = useState('All')
 
+  const catMap: Record<string, string[]> = {
+    Lips:      ['Lipstick'],
+    Eyes:      ['Eyeshadow', 'Mascara'],
+    Face:      ['Foundation', 'Blush', 'Concealer', 'Primer'],
+    Skincare:  ['Skincare'],
+    Fragrance: ['Perfume', 'Fragrance'],
+  }
+
   const filtered = activeTab === 'All'
     ? products
-    : products.filter((p) => {
-        const catMap: Record<string, string[]> = {
-          Lips: ['Lipstick'],
-          Eyes: ['Eyeshadow', 'Mascara'],
-          Face: ['Foundation', 'Blush', 'Concealer', 'Primer'],
-          Skincare: ['Skincare'],
-        }
-        return catMap[activeTab]?.includes(p.category)
-      })
+    : products.filter((p) => catMap[activeTab]?.includes(p.category))
 
   return (
-    <section className="py-20 bg-background">
+    <section className="py-16 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-14"
-        >
-          <div className="flex items-center justify-center gap-2 mb-3">
-            <Sparkles className="w-4 h-4 text-primary" />
-            <span className="text-xs font-poppins font-semibold tracking-widest text-primary uppercase">
-              Featured Products
-            </span>
-            <Sparkles className="w-4 h-4 text-primary" />
-          </div>
-          <h2 className="font-playfair text-4xl lg:text-5xl font-bold text-dark mb-4 section-title">
-            Luxe Picks For You
-          </h2>
-          <p className="text-gray-500 font-poppins max-w-xl mx-auto">
-            Curated by our expert beauty editors — the finest products for every look.
-          </p>
-        </motion.div>
 
-        {/* Tabs */}
+        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="flex justify-center gap-2 mb-12 flex-wrap"
+          className="mb-8"
+        >
+          <span className="text-xs font-poppins font-semibold tracking-widest text-primary uppercase">
+            Featured
+          </span>
+          <h2 className="font-playfair text-3xl lg:text-4xl font-bold text-dark mt-1 section-title text-left">
+            Top Picks
+          </h2>
+        </motion.div>
+
+        {/* Filter Tabs */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="flex gap-2 mb-10 overflow-x-auto no-scrollbar pb-1"
         >
           {tabs.map((tab) => (
             <motion.button
               key={tab}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
               onClick={() => setActiveTab(tab)}
-              className={`px-6 py-2.5 rounded-full text-sm font-poppins font-medium transition-all duration-300 ${
+              className={`flex-shrink-0 px-5 py-2 rounded-lg text-sm font-poppins font-medium transition-all duration-200 ${
                 activeTab === tab
-                  ? 'bg-primary text-white shadow-glow-gold'
-                  : 'bg-white text-gray-600 border border-secondary/50 hover:border-primary hover:text-primary'
+                  ? 'bg-primary text-white shadow-sm'
+                  : 'bg-white text-gray-500 border border-gray-200 hover:border-primary hover:text-primary'
               }`}
             >
               {tab}
@@ -75,30 +69,31 @@ export default function FeaturedProducts() {
         {/* Products Grid */}
         <motion.div
           layout
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"
+          className="grid grid-cols-2 lg:grid-cols-4 gap-6"
         >
-          {filtered.map((product, i) => (
+          {filtered.slice(0, 8).map((product, i) => (
             <ProductCard key={product.id} product={product} index={i} />
           ))}
         </motion.div>
 
-        {/* CTA */}
+        {/* View All */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className="text-center mt-14"
+          className="text-center mt-12"
         >
-          <motion.a
-            href="/shop"
-            whileHover={{ scale: 1.05, y: -2 }}
-            whileTap={{ scale: 0.97 }}
-            className="inline-flex items-center gap-2 px-10 py-4 rounded-full border-2 border-primary text-primary font-poppins font-semibold hover:bg-primary hover:text-white transition-all duration-300"
-          >
-            View All Products
-            <Sparkles className="w-4 h-4" />
-          </motion.a>
+          <Link href="/shop">
+            <motion.button
+              whileHover={{ scale: 1.03, y: -1 }}
+              whileTap={{ scale: 0.97 }}
+              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-lg border-2 border-dark text-dark font-poppins font-semibold text-sm hover:bg-dark hover:text-white transition-all duration-300"
+            >
+              View All Products
+            </motion.button>
+          </Link>
         </motion.div>
+
       </div>
     </section>
   )
